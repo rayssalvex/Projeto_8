@@ -1,46 +1,84 @@
-import { ResumeData } from "../App";
+import React from 'react';
+import { ResumeData } from '../types';
+import { FaUser, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 interface Props {
-  resume: ResumeData;
+  data: ResumeData;
 }
 
-export default function Preview({ resume }: Props) {
+const Preview: React.FC<Props> = ({ data }) => {
+  // Garantindo que todos os dados sejam extraídos
+  const { personalInfo, experiences, education, languages, volunteering, certifications } = data;
+
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Preview do Seu Currículo</h2>
-      <div>
-        <h3 className="text-lg font-semibold">{resume.personal.name || "Seu Nome"}</h3>
-        <p>{resume.personal.email || "email@exemplo.com"}</p>
-        <p>{resume.personal.phone || "(00) 00000-0000"}</p>
-        <p>{resume.personal.linkedin || "linkedin.com/in/seu-perfil"}</p>
-        <p className="mt-2 italic">{resume.personal.summary || "Resumo profissional..."}</p>
-      </div>
-      <div>
-        <h3 className="font-semibold">Habilidades</h3>
-        <ul className="list-disc ml-6">
-          {resume.skills.length > 0 ? (
-            resume.skills.map((s) => (
-              <li key={s.id}>{s.name} - <span className="text-gray-600">{s.level}</span></li>
-            ))
-          ) : (
-            <p className="text-gray-400">Nenhuma habilidade adicionada</p>
-          )}
-        </ul>
-      </div>
-      <div>
-        <h3 className="font-semibold">Experiências</h3>
-        {resume.experiences.length > 0 ? (
-          resume.experiences.map((exp) => (
-            <div key={exp.id} className="mb-4">
-              <p className="font-bold">{exp.role} - {exp.company}</p>
-              <p className="text-sm text-gray-600">{exp.current ? "Atualmente" : exp.period}</p>
-              <p>{exp.description}</p>
+    <div className="bg-gray-200 p-8 font-sans print:p-0 print:bg-white">
+      <div className="w-full max-w-4xl mx-auto bg-white shadow-lg flex min-h-[29.7cm] rounded-lg overflow-hidden">
+        
+        {/* Coluna Esquerda (Sidebar) com o novo estilo */}
+        <aside className="w-1/3 bg-cream text-slate-700 p-6 relative">
+          {/* Topo curvo azul */}
+          <div className="absolute top-0 left-0 right-0 h-20 bg-sky-700 rounded-b-[100px]"></div>
+
+          <section className="mt-20">
+            <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Dados Pessoais</h2>
+            <ul className="mt-4 space-y-3 text-sm">
+              <li className="flex items-center"><FaUser className="mr-3 text-sky-700" /><span>{personalInfo.name || 'Seu Nome'}</span></li>
+              <li className="flex items-center"><FaMapMarkerAlt className="mr-3 text-sky-700" /><span>{personalInfo.placeOfBirth || 'Sua Cidade'}</span></li>
+              <li className="flex items-center"><FaLinkedin className="mr-3 text-sky-700" /><a href={personalInfo.linkedin || '#'} className="hover:underline break-all">{personalInfo.linkedin ? personalInfo.linkedin.replace('https://www.', '') : 'seu-linkedin'}</a></li>
+              <li className="flex items-center"><FaGithub className="mr-3 text-sky-700" /><a href={personalInfo.github || '#'} className="hover:underline break-all">{personalInfo.github ? personalInfo.github.replace('https://www.', '') : 'seu-github'}</a></li>
+            </ul>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Idiomas</h2>
+            <ul className="mt-4 space-y-2 text-sm">
+              {languages.length > 0 ? (
+                languages.map(lang => <li key={lang.id}>{lang.name}</li>)
+              ) : (
+                <li className="text-slate-500">Adicione idiomas...</li>
+              )}
+            </ul>
+          </section>
+
+          {/* Rodapé curvo azul */}
+          <div className="absolute inset-x-0 bottom-0 h-10 bg-sky-700 rounded-t-[100px]"></div>
+        </aside>
+
+        {/* Coluna Direita (Conteúdo Principal) */}
+        <main className="w-2/3 flex-grow p-8 text-gray-700 bg-white">
+          <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome'}</h1>
+          
+          <section className="mb-6">
+            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
+            <div className="space-y-4">
+              {education.length > 0 ? (education.map((edu) => (<div key={edu.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{edu.course || 'Curso'}</p><p className="text-gray-600">{edu.period || 'Período'}</p></div><p className="italic">{edu.institution || 'Instituição'}</p></div>))) : (<p className="text-sm text-gray-500">Adicione sua formação...</p>)}
             </div>
-          ))
-        ) : (
-          <p className="text-gray-400">Nenhuma experiência adicionada</p>
-        )}
+          </section>
+
+          <section className="mb-6">
+            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiências Profissionais</h2>
+            <div className="space-y-4">
+              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{exp.role || 'Cargo'}</p><p className="text-gray-600">{exp.period || 'Período'}</p></div><p className="italic">{exp.company || 'Empresa, Local'}</p><p className="mt-1 leading-relaxed">{exp.description || 'Descrição da sua função.'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
+            </div>
+          </section>
+
+          <section className="mb-6">
+            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Voluntariado</h2>
+            <div className="space-y-4">
+              {volunteering.length > 0 ? volunteering.map(vol => (<div key={vol.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{vol.role || 'Cargo'}</p><p className="text-gray-600">{vol.period || 'Período'}</p></div><p className="italic">{vol.organization || 'Organização'}</p><p className="mt-1 leading-relaxed">{vol.description || 'Descrição.'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
+            <div className="space-y-4">
+              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas certificações...</p>)}
+            </div>
+          </section>
+        </main>
       </div>
     </div>
   );
-}
+};
+
+export default Preview;

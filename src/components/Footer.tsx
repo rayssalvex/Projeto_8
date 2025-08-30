@@ -1,7 +1,11 @@
-export default function Footer() {
+import React from 'react';
+
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-200 text-gray-700 px-6 py-4 text-center">
-      <p>© 2025 Gerador de Currículo. Todos os direitos reservados.</p>
+    <footer className="bg-gradient-custom p-3 text-center text-white text-sm">
+      <p>Projeto-8, BotiCode. Desenvolvido com React, TypeScript e TailwindCSS.</p>
     </footer>
   );
-}
+};
+
+export default Footer;

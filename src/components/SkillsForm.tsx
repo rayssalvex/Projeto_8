@@ -1,49 +1,53 @@
-import { ResumeData, Skill } from "../App";
+import React, { useState } from 'react';
+import { ResumeData, Skill } from '../types';
 
 interface Props {
-  resume: ResumeData;
-  setResume: React.Dispatch<React.SetStateAction<ResumeData>>;
+  skills: Skill[];
+  setResumeData: React.Dispatch<React.SetStateAction<ResumeData>>;
 }
 
-export default function SkillsForm({ resume, setResume }: Props) {
-  const addSkill = () => {
-    const newSkill: Skill = { id: Date.now(), name: "", level: "Básico" };
-    setResume((prev) => ({ ...prev, skills: [...prev.skills, newSkill] }));
+const SkillsForm: React.FC<Props> = ({ skills, setResumeData }) => {
+  const [newSkill, setNewSkill] = useState({ name: '', level: 'Básico' as Skill['level'] });
+
+  const handleAdd = () => {
+    if (newSkill.name.trim() === '') return;
+    const skillToAdd: Skill = { ...newSkill, id: crypto.randomUUID() };
+    setResumeData(prev => ({ ...prev, skills: [...prev.skills, skillToAdd] }));
+    setNewSkill({ name: '', level: 'Básico' });
   };
 
-  const updateSkill = (id: number, field: keyof Skill, value: string) => {
-    setResume((prev) => ({
+  const handleRemove = (id: string) => {
+    setResumeData(prev => ({
       ...prev,
-      skills: prev.skills.map((s) => (s.id === id ? { ...s, [field]: value } : s)),
+      skills: prev.skills.filter(skill => skill.id !== id),
     }));
   };
 
-  const removeSkill = (id: number) => {
-    setResume((prev) => ({
-      ...prev,
-      skills: prev.skills.filter((s) => s.id !== id),
-    }));
-  };
+  const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
+  const buttonClasses = "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity duration-200 whitespace-nowrap";
 
   return (
-    <div>
-      <h3 className="font-semibold mb-2">Habilidades</h3>
-      <button type="button" className="bg-blue-500 text-white px-3 py-1 rounded mb-2"
-        onClick={addSkill}>Adicionar Habilidade</button>
-      {resume.skills.map((skill) => (
-        <div key={skill.id} className="flex gap-2 mb-2">
-          <input type="text" placeholder="Habilidade" className="border p-2 flex-1"
-            value={skill.name} onChange={(e) => updateSkill(skill.id, "name", e.target.value)} />
-          <select className="border p-2" value={skill.level}
-            onChange={(e) => updateSkill(skill.id, "level", e.target.value as Skill["level"])}>
-            <option>Básico</option>
-            <option>Intermediário</option>
-            <option>Avançado</option>
-          </select>
-          <button type="button" className="bg-red-500 text-white px-2"
-            onClick={() => removeSkill(skill.id)}>X</button>
-        </div>
-      ))}
+    <div className="p-4 border border-gray-700 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4 text-white">Habilidades</h2>
+      <div className="flex gap-4 mb-4">
+        <input value={newSkill.name} onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })} placeholder="Nome da Habilidade" className={`${inputClasses} flex-grow`} />
+        <select value={newSkill.level} onChange={(e) => setNewSkill({ ...newSkill, level: e.target.value as Skill['level'] })} className={inputClasses}>
+          <option>Básico</option>
+          <option>Intermediário</option>
+          <option>Avançado</option>
+        </select>
+        <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
+      </div>
+      <ul className="space-y-2">
+        {skills.map(skill => (
+          <li key={skill.id} className="flex justify-between items-center bg-gray-800 p-2 rounded">
+            <span>{skill.name} ({skill.level})</span>
+            <button type="button" onClick={() => handleRemove(skill.id)} className="text-red-500 hover:text-red-400">Remover</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
+
+export default SkillsForm;
