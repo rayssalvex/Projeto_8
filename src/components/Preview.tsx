@@ -18,7 +18,7 @@ const Preview: React.FC<Props> = ({ data }) => {
         <aside className="w-1/3 text-slate-700 relative flex flex-col items-center pb-6 pt-12">
           {/* Foto de Perfil */}
           <div className="relative z-20 w-32 h-32 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mb-8 shadow-md">
-          <FaUser className="text-white text-5xl" />
+            {personalInfo.photoUrl ? (<img src={personalInfo.photoUrl} alt="Foto de Perfil" className="w-full h-full object-cover" />) : (<FaUser className="text-white text-5xl" />)}
           </div>
           {/* Dados Pessoais */}
           <section className="mt-8 px-6 w-full">
