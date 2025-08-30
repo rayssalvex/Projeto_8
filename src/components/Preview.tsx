@@ -14,12 +14,14 @@ const Preview: React.FC<Props> = ({ data }) => {
     <div className="bg-gray-200 p-8 font-sans print:p-0 print:bg-white">
       <div className="w-full max-w-4xl mx-auto bg-white shadow-lg flex min-h-[29.7cm] rounded-lg overflow-hidden">
         
-        {/* Coluna Esquerda (Sidebar) com o novo estilo */}
-        <aside className="w-1/3 bg-cream text-slate-700 p-6 relative">
-          {/* Topo curvo azul */}
-          <div className="absolute top-0 left-0 right-0 h-20 bg-sky-700 rounded-b-[100px]"></div>
-
-          <section className="mt-20">
+        {/* Coluna Esquerda (Sidebar), introduzido todas as informações do formulário inserido e foto de perfil*/}
+        <aside className="w-1/3 text-slate-700 relative flex flex-col items-center pb-6 pt-12">
+          {/* Foto de Perfil */}
+          <div className="relative z-20 w-32 h-32 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mb-8 shadow-md">
+          <FaUser className="text-white text-5xl" />
+          </div>
+          {/* Dados Pessoais */}
+          <section className="mt-8 px-6 w-full">
             <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Dados Pessoais</h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-center"><FaUser className="mr-3 text-sky-700" /><span>{personalInfo.name || 'Seu Nome'}</span></li>
@@ -36,8 +38,8 @@ const Preview: React.FC<Props> = ({ data }) => {
               {personalInfo.customField && <li className="flex items-center"><FaPlus className="mr-3 text-sky-700" /><span>{personalInfo.customField}</span></li>}
             </ul>
           </section>
-
-          <section className="mt-8">
+          {/* Idiomas */}
+          <section className="mt-8 px-6 w-full">
             <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Idiomas</h2>
             <ul className="mt-4 space-y-2 text-sm">
               {languages.length > 0 ? (
@@ -47,14 +49,11 @@ const Preview: React.FC<Props> = ({ data }) => {
               )}
             </ul>
           </section>
-
-          {/* Rodapé curvo azul */}
-          <div className="absolute inset-x-0 bottom-0 h-10 bg-sky-700 rounded-t-[100px]"></div>
         </aside>
 
         {/* Coluna Direita (Conteúdo Principal) */}
         <main className="w-2/3 flex-grow p-8 text-gray-700 bg-white">
-          <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome'}</h1>
+          <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome Completo'}</h1>
           
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
