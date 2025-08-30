@@ -29,8 +29,19 @@ const Preview: React.FC<Props> = ({ data }) => {
               <li className="flex items-center"><span className="mr-3">📧</span><span>{personalInfo.email || 'seu-email@exemplo.com'}</span></li>
               <li className="flex items-center"><span className="mr-3">📞</span><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
               <li className="flex items-center"><span className="mr-3">🎂</span><span>{personalInfo.dateOfBirth || 'Data de Nascimento'}</span></li>
-              <li className="flex items-center"><FaLinkedin className="mr-3 text-sky-700" /><a href={personalInfo.linkedin || '#'} className="hover:underline break-all">{personalInfo.linkedin ? personalInfo.linkedin.replace('https://www.', '') : 'Seu linkedin'}</a></li>
-              <li className="flex items-center"><FaGithub className="mr-3 text-sky-700" /><a href={personalInfo.github || '#'} className="hover:underline break-all">{personalInfo.github ? personalInfo.github.replace('https://www.', '') : 'Seu github'}</a></li>
+              {personalInfo.linkedin && (
+                <li className="flex items-center">
+                  <FaLinkedin className="mr-3 text-sky-700" />
+                  <a href={`https://${personalInfo.linkedin.replace('https://', '').replace('http://', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline break-all">{personalInfo.linkedin.replace('https://www.', '')}</a>
+                </li>
+              )}
+              {personalInfo.github && (
+                <li className="flex items-center">
+                  <FaGithub className="mr-3 text-sky-700" />
+                  
+                  <a href={`https://${personalInfo.github.replace('https://', '').replace('http://', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline break-all">{personalInfo.github.replace('https://www.', '')}</a>
+                </li>
+              )}
               {personalInfo.gender && <li className="flex items-center"><span className="mr-3">⚧️</span><span>{personalInfo.gender}</span></li>}
               {personalInfo.civilStatus && <li className="flex items-center"><span className="mr-3">💍</span><span>{personalInfo.civilStatus}</span></li>}
               {personalInfo.nationality && <li className="flex items-center"><span className="mr-3">🗺️</span><span>{personalInfo.nationality}</span></li>}
