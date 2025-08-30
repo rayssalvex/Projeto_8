@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #111827;
+  color: #d1d5db;
+}
+
+@media print {
+  /* NOVO: Define o tamanho da página e remove as margens padrão do navegador */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Força a impressão de cores e imagens de fundo */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

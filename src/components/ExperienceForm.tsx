@@ -1,54 +1,53 @@
-import { ResumeData, Experience } from "../App";
+import React from 'react';
+import { ResumeData, Experience } from '../types';
 
 interface Props {
-  resume: ResumeData;
-  setResume: React.Dispatch<React.SetStateAction<ResumeData>>;
+  experiences: Experience[];
+  setResumeData: React.Dispatch<React.SetStateAction<ResumeData>>;
 }
 
-export default function ExperienceForm({ resume, setResume }: Props) {
-  const addExperience = () => {
-    const newExp: Experience = { id: Date.now(), company: "", role: "", period: "", description: "", current: false };
-    setResume((prev) => ({ ...prev, experiences: [...prev.experiences, newExp] }));
+const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
+  const handleAdd = () => {
+    const newExp: Experience = { id: crypto.randomUUID(), company: '', role: '', period: '', description: '' };
+    setResumeData(prev => ({ ...prev, experiences: [...prev.experiences, newExp] }));
   };
 
-  const updateExp = (id: number, field: keyof Experience, value: any) => {
-    setResume((prev) => ({
+  const handleRemove = (id: string) => {
+    setResumeData(prev => ({ ...prev, experiences: prev.experiences.filter(exp => exp.id !== id) }));
+  };
+
+  const handleChange = (id: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setResumeData(prev => ({
       ...prev,
-      experiences: prev.experiences.map((exp) => (exp.id === id ? { ...exp, [field]: value } : exp)),
+      experiences: prev.experiences.map(exp => exp.id === id ? { ...exp, [name]: value } : exp)
     }));
   };
 
-  const removeExp = (id: number) => {
-    setResume((prev) => ({
-      ...prev,
-      experiences: prev.experiences.filter((exp) => exp.id !== id),
-    }));
-  };
+  const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
+  const buttonClasses = "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity duration-200 whitespace-nowrap";
 
   return (
-    <div>
-      <h3 className="font-semibold mb-2">Experiências</h3>
-      <button type="button" className="bg-blue-500 text-white px-3 py-1 rounded mb-2"
-        onClick={addExperience}>Adicionar Experiência</button>
-      {resume.experiences.map((exp) => (
-        <div key={exp.id} className="border p-2 mb-2 space-y-2">
-          <input type="text" placeholder="Empresa" className="w-full border p-2"
-            value={exp.company} onChange={(e) => updateExp(exp.id, "company", e.target.value)} />
-          <input type="text" placeholder="Cargo" className="w-full border p-2"
-            value={exp.role} onChange={(e) => updateExp(exp.id, "role", e.target.value)} />
-          <input type="text" placeholder="Período" className="w-full border p-2"
-            value={exp.period} onChange={(e) => updateExp(exp.id, "period", e.target.value)} />
-          <textarea placeholder="Descrição" className="w-full border p-2"
-            value={exp.description} onChange={(e) => updateExp(exp.id, "description", e.target.value)} />
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={exp.current}
-              onChange={(e) => updateExp(exp.id, "current", e.target.checked)} />
-            Trabalho atual
-          </label>
-          <button type="button" className="bg-red-500 text-white px-2"
-            onClick={() => removeExp(exp.id)}>Remover</button>
-        </div>
-      ))}
+    <div className="p-4 border border-gray-700 rounded-lg">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold text-white">Experiências</h2>
+        <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
+      </div>
+      <div className="space-y-4">
+        {experiences.map((exp) => (
+          <div key={exp.id} className="p-3 border border-gray-600 rounded-md relative">
+            <button type="button" onClick={() => handleRemove(exp.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold">X</button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input name="role" value={exp.role} onChange={(e) => handleChange(exp.id, e)} placeholder="Cargo" className={inputClasses} />
+              <input name="company" value={exp.company} onChange={(e) => handleChange(exp.id, e)} placeholder="Empresa" className={inputClasses} />
+            </div>
+            <input name="period" value={exp.period} onChange={(e) => handleChange(exp.id, e)} placeholder="Período (Ex: Jan 2020 - Dez 2022)" className={`${inputClasses} mt-4`} />
+            <textarea name="description" value={exp.description} onChange={(e) => handleChange(exp.id, e)} placeholder="Descrição das atividades" className={`${inputClasses} mt-4 h-20`}></textarea>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default ExperienceForm;
