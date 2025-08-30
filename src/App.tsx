@@ -7,7 +7,8 @@ import { ResumeData } from './types';
 
 function App() {
   const [resumeData, setResumeData] = useState<ResumeData>({
-    personalInfo: { name: '', email: '', phone: '', linkedin: '', github: '', dateOfBirth: '', placeOfBirth: '', gender: '', nationality: '', civilStatus: '', website: '', customField: '', },
+    personalInfo: { name: '', email: '', phone: '', linkedin: '', github: '', dateOfBirth: '', placeOfBirth: '', gender: '', nationality: '', civilStatus: '', website: '', customField: '', photoUrl: '' },
+
     skills: [],
     experiences: [],
     education: [],

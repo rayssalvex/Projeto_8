@@ -1,4 +1,5 @@
 export interface PersonalInfo {
+  photoUrl: any;
   name: string;
   email: string;
   phone: string;
