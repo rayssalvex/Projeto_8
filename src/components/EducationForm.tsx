@@ -36,8 +36,8 @@ const EducationForm: React.FC<Props> = ({ education, setResumeData }) => {
       <div className="space-y-4">
         {education.map(edu => (
           <div key={edu.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(edu.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold">X</button>
-            <input name="course" value={edu.course} onChange={(e) => handleChange(edu.id, e)} placeholder="Curso" className={inputClasses} />
+            <button type="button" onClick={() => handleRemove(edu.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
+            <input name="course" value={edu.course} onChange={(e) => handleChange(edu.id, e)} placeholder="Curso" className={`${inputClasses} mt-6`} />
             <input name="institution" value={edu.institution} onChange={(e) => handleChange(edu.id, e)} placeholder="Instituição" className={`${inputClasses} mt-4`} />
             <input name="period" value={edu.period} onChange={(e) => handleChange(edu.id, e)} placeholder="Período" className={`${inputClasses} mt-4`} />
           </div>

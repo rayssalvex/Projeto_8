@@ -36,10 +36,10 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
       <div className="space-y-4">
         {experiences.map((exp) => (
           <div key={exp.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(exp.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold">X</button>
+            <button type="button" onClick={() => handleRemove(exp.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input name="role" value={exp.role} onChange={(e) => handleChange(exp.id, e)} placeholder="Cargo" className={inputClasses} />
-              <input name="company" value={exp.company} onChange={(e) => handleChange(exp.id, e)} placeholder="Empresa" className={inputClasses} />
+              <input name="role" value={exp.role} onChange={(e) => handleChange(exp.id, e)} placeholder="Cargo" className={`${inputClasses} mt-6` }/>
+              <input name="company" value={exp.company} onChange={(e) => handleChange(exp.id, e)} placeholder="Empresa" className={`${inputClasses} mt-6` }/>
             </div>
             <input name="period" value={exp.period} onChange={(e) => handleChange(exp.id, e)} placeholder="Período (Ex: Jan 2020 - Dez 2022)" className={`${inputClasses} mt-4`} />
             <textarea name="description" value={exp.description} onChange={(e) => handleChange(exp.id, e)} placeholder="Descrição das atividades" className={`${inputClasses} mt-4 h-20`}></textarea>
