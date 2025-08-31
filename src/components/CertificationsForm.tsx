@@ -36,8 +36,8 @@ const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) 
       <div className="space-y-4">
         {certifications.map(cert => (
           <div key={cert.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(cert.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold">X</button>
-            <input name="name" value={cert.name} onChange={(e) => handleChange(cert.id, e)} placeholder="Nome da Certificação" className={inputClasses} />
+            <button type="button" onClick={() => handleRemove(cert.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
+            <input name="name" value={cert.name} onChange={(e) => handleChange(cert.id, e)} placeholder="Nome da Certificação" className={`${inputClasses} mt-6`} />
             <input name="organization" value={cert.organization} onChange={(e) => handleChange(cert.id, e)} placeholder="Organização Emissora" className={`${inputClasses} mt-4`} />
             <input name="date" value={cert.date} onChange={(e) => handleChange(cert.id, e)} placeholder="Data de Emissão" className={`${inputClasses} mt-4`} />
           </div>

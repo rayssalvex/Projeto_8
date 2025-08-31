@@ -36,10 +36,10 @@ const VolunteeringForm: React.FC<Props> = ({ volunteering, setResumeData }) => {
       <div className="space-y-4">
         {volunteering.map(vol => (
           <div key={vol.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(vol.id)} className="absolute top-2 right-2 text-red-500 hover:text-red-400 font-bold">X</button>
+            <button type="button" onClick={() => handleRemove(vol.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input name="role" value={vol.role} onChange={(e) => handleChange(vol.id, e)} placeholder="Cargo" className={inputClasses} />
-              <input name="organization" value={vol.organization} onChange={(e) => handleChange(vol.id, e)} placeholder="Organização" className={inputClasses} />
+              <input name="role" value={vol.role} onChange={(e) => handleChange(vol.id, e)} placeholder="Cargo" className={`${inputClasses} mt-6`} />
+              <input name="organization" value={vol.organization} onChange={(e) => handleChange(vol.id, e)} placeholder="Organização" className={`${inputClasses} mt-6`} />
             </div>
             <input name="period" value={vol.period} onChange={(e) => handleChange(vol.id, e)} placeholder="Período" className={`${inputClasses} mt-4`} />
             <textarea name="description" value={vol.description} onChange={(e) => handleChange(vol.id, e)} placeholder="Descrição" className={`${inputClasses} mt-4 h-20`}></textarea>
