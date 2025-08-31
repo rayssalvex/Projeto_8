@@ -39,8 +39,6 @@ export interface Language {
   id: string;
   name: string;
 }
-
-// --- NOVAS INTERFACES ---
 export interface Volunteering {
   id: string;
   organization: string;
@@ -62,7 +60,6 @@ export interface ResumeData {
   experiences: Experience[];
   education: Education[];
   languages: Language[];
-  // --- NOVOS CAMPOS ---
   volunteering: Volunteering[];
   certifications: Certification[];
 }

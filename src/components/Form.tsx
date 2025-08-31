@@ -1,10 +1,7 @@
 import React from 'react';
 import { ResumeData } from '../types';
-
-// --- 1. IMPORTE A BIBLIOTECA E SEU CSS ---
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
 import PersonalDataForm from './PersonalDataForm';
 import SkillsForm from './SkillsForm';
 import ExperienceForm from './ExperienceForm';
@@ -23,7 +20,21 @@ const Form: React.FC<Props> = ({ resumeData, setResumeData }) => {
   
   const handleLinkedInImport = () => {
     const mockLinkedInData: ResumeData = {
-      personalInfo: { name: 'Brenda Oliveira', email: 'brenda.oliveira@example.com', phone: '(47) 99876-5432', linkedin: 'https://linkedin.com/in/brenda-oliveira-dev', github: 'https://github.com/brenda-dev', dateOfBirth: '15/05/1995', placeOfBirth: 'Joinville, SC', gender: 'Feminino', nationality: 'Brasileira', civilStatus: 'Solteira', website: 'https://seusite.com', customField: 'Disponibilidade para realocação' },
+      personalInfo: {
+        photoUrl: '../src/image/Brenda-documento.png',
+        name: 'Brenda Oliveira',
+        email: 'brenda@example.com',
+        phone: '(47) 99876-5432',
+        linkedin: 'https://linkedin.com/in/brenda-oliveira-dev',
+        github: 'https://github.com/brenda-dev',
+        dateOfBirth: '15/05/1995',
+        placeOfBirth: 'Joinville, SC',
+        gender: 'Feminino',
+        nationality: 'Brasileira',
+        civilStatus: 'Solteira',
+        website: 'https://seusite.com',
+        customField: 'Disponibilidade para realocação'
+      },
       skills: [ { id: 'skill-1', name: 'React', level: 'Avançado' }, { id: 'skill-2', name: 'TypeScript', level: 'Avançado' }, { id: 'skill-3', name: 'Node.js', level: 'Intermediário' }, { id: 'skill-4', name: 'SQL', level: 'Intermediário' } ],
       experiences: [ { id: 'exp-1', company: 'Tech Solutions Inc.', role: 'Desenvolvedora Front-end Pleno', period: 'Jan 2022 - Presente', description: 'Desenvolvimento e manutenção de interfaces de usuário com React e TypeScript. Colaboração em equipes ágeis para entregar novas funcionalidades.' }, { id: 'exp-2', company: 'Inova Web Ltda.', role: 'Desenvolvedora Júnior', period: 'Jul 2020 - Dez 2021', description: 'Criação de websites responsivos e otimizados para clientes de diversos setores, utilizando HTML, CSS e JavaScript.' } ],
       education: [ { id: 'edu-1', course: 'Análise e Desenvolvimento de Sistemas', institution: 'Gran Faculdade', period: '2024 - 2026' } ],
