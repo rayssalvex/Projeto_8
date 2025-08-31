@@ -14,6 +14,24 @@ body {
     margin: 0;
   }
 
+   /* Classe para esconder elementos na impressão */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Garante que o container do preview ocupe toda a página */
+  .print-container {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Remove a sombra e o fundo cinza do preview na impressão */
+  .print-preview-wrapper {
+    padding: 0 !important;
+    background-color: white !important;
+  }
+
   /* Força a impressão de cores e imagens de fundo */
   body {
     -webkit-print-color-adjust: exact !important;
