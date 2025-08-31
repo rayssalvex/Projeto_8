@@ -35,12 +35,13 @@ const PersonalDataForm: React.FC<Props> = ({ personalInfo, setResumeData }) => {
   const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
 
   return (
-  <div className="p-4 border border-gray-700 rounded-lg">
-    <h2 className="text-xl font-semibold mb-4 text-white">Dados Pessoais</h2>
-      
+    <div className="p-4 border border-gray-700 rounded-lg">
+      <h2 className="text-xl font-semibold mb-4 text-white">Dados Pessoais</h2>
       {/* --- CAMPO ADICIONADO PARA O UPLOAD DE ARQUIVO --- */}
       <div className="mb-4">
-        <label htmlFor="photo-upload" className="block text-gray-400">Foto de Perfil</label>
+        <label htmlFor="photo-upload" className="block text-gray-400">
+          Foto de Perfil
+        </label>
         <input
           type="file"
           id="photo-upload"
@@ -50,29 +51,124 @@ const PersonalDataForm: React.FC<Props> = ({ personalInfo, setResumeData }) => {
           className="w-full mt-1 p-2 bg-gray-800 text-white border border-gray-600 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
         />
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Cada input agora tem a propriedade 'value' conectada ao estado */}
-        <input name="name" value={personalInfo.name} onChange={handleChange} placeholder="Nome Completo" className={inputClasses} />
-        <input name="email" value={personalInfo.email} onChange={handleChange} placeholder="Email" className={inputClasses} />
-        
-        <input name="phone" value={personalInfo.phone} onChange={handleChange} placeholder="Telefone" className={inputClasses} />
-        <input name="linkedin" value={personalInfo.linkedin} onChange={handleChange} placeholder="URL do LinkedIn" className={inputClasses} />
-
-        <input name="dateOfBirth" value={personalInfo.dateOfBirth} onChange={handleChange} placeholder="Data de Nascimento" className={inputClasses} />
-        <input name="github" value={personalInfo.github} onChange={handleChange} placeholder="URL do GitHub" className={inputClasses} />
-        
-        <input name="gender" value={personalInfo.gender} onChange={handleChange} placeholder="Gênero" className={inputClasses} />
-        <input name="civilStatus" value={personalInfo.civilStatus} onChange={handleChange} placeholder="Estado Civil" className={inputClasses} />
-        
-        <input name="placeOfBirth" value={personalInfo.placeOfBirth} onChange={handleChange} placeholder="Local de Nascimento" className={inputClasses} />
-        <input name="nationality" value={personalInfo.nationality} onChange={handleChange} placeholder="Nacionalidade" className={inputClasses} />
-
-        <input name="website" value={personalInfo.website} onChange={handleChange} placeholder="Website" className={inputClasses} />
-        <input name="customField" value={personalInfo.customField} onChange={handleChange} placeholder="Campo Personalizado (Ex: Portfólio)" className={inputClasses} />
-      </div>
-    </div>
-  );
+           {" "}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+               {" "}
+        {/* Cada input agora tem a propriedade 'value' conectada ao estado */} 
+             {" "}
+        <input
+          name="name"
+          value={personalInfo.name}
+          onChange={handleChange}
+          placeholder="Nome Completo"
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="email"
+          value={personalInfo.email}
+          onChange={handleChange}
+          placeholder="Email"
+          className={inputClasses}
+        />
+                       {" "}
+        <input
+          name="phone"
+          value={personalInfo.phone}
+          onChange={handleChange}
+          placeholder="Telefone"
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="linkedin"
+          value={personalInfo.linkedin}
+          onChange={handleChange}
+          placeholder="URL do LinkedIn"
+          className={inputClasses}
+        />
+        <input
+          type="date"
+          name="dateOfBirth"
+          value={personalInfo.dateOfBirth || ""}
+          onChange={handleChange}
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="github"
+          value={personalInfo.github}
+          onChange={handleChange}
+          placeholder="URL do GitHub"
+          className={inputClasses}
+        />
+                       {" "}
+        <select
+          name="gender"
+          value={personalInfo.gender}
+          
+          className={inputClasses}
+        >
+          <option value="" disabled>
+            Selecione o Gênero
+          </option>
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+          <option value="nao-binario">Não Binário</option>
+          <option value="prefiro-nao-informar">Prefiro não informar</option>
+        </select>
+               {" "}
+        <select
+          name="civilStatus"
+          value={personalInfo.civilStatus}
+          className={inputClasses}
+        >
+          <option value="" disabled>
+            Selecione o Estado Civil
+          </option>{" "}
+          <option value="solteiro">Solteiro(a)</option>
+          <option value="casado">Casado(a)</option>
+          <option value="divorciado">Divorciado(a)</option>
+          <option value="viuvo">Viúvo(a)</option>
+          <option value="separado">Separado(a)</option>
+        </select>
+                       {" "}
+        <input
+          name="placeOfBirth"
+          value={personalInfo.placeOfBirth}
+          onChange={handleChange}
+          placeholder="Local de Nascimento"
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="nationality"
+          value={personalInfo.nationality}
+          onChange={handleChange}
+          placeholder="Nacionalidade"
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="website"
+          value={personalInfo.website}
+          onChange={handleChange}
+          placeholder="Website"
+          className={inputClasses}
+        />
+               {" "}
+        <input
+          name="customField"
+          value={personalInfo.customField}
+          onChange={handleChange}
+          placeholder="Campo Personalizado (Ex: Portfólio)"
+          className={inputClasses}
+        />
+             {" "}
+      </div>
+         {" "}
+    </div>
+  );
 };
 
 export default PersonalDataForm;
