@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResumeData } from '../types';
-// 1. ÍCONES ADICIONADOS AQUI
 import { 
   FaUser, 
   FaMapMarkerAlt, 
@@ -23,17 +22,20 @@ interface Props {
 const Preview: React.FC<Props> = ({ data }) => {
   const { personalInfo, experiences, education, languages, volunteering, certifications } = data;
 
+  const formatBrazilianDate = (dateString: string) => {
+    if (!dateString) return 'Data de Nascimento';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  };
+
   return (
     <div className="bg-slate-700 p-8 font-sans print:p-0 print:bg-white">
       <div className="w-full max-w-4xl mx-auto bg-white shadow-lg flex min-h-[29.7cm] rounded-lg overflow-hidden">
         
-        {/* Coluna Esquerda (Sidebar) com o novo estilo */}
         <aside className="w-1/3 bg-cream text-slate-700 p-6 relative flex flex-col items-center">
         
-        {/* Topo azul */}
         <div className="absolute top-0 left-0 right-0 h-5 bg-sky-700 rounded-b-[100px]"></div>
 
-        {/* Foto */}
         <div className="relative z-20 w-36 h-36 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mt-8 mb-2 shadow-md border-4 border-sky-700">
           {personalInfo.photoUrl ? (
             <img src={personalInfo.photoUrl} alt="Foto de Perfil" className="w-full h-full object-cover" />
@@ -42,15 +44,18 @@ const Preview: React.FC<Props> = ({ data }) => {
           )}
         </div>
 
-          {/* Dados pessoais */}
           <section className="mt-8 px-6 w-full">
             <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Dados Pessoais</h2>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-center"><FaUser className="mr-3 text-sky-700" /><span>{personalInfo.name || 'Seu Nome'}</span></li>
               <li className="flex items-center"><FaMapMarkerAlt className="mr-3 text-sky-700" /><span>{personalInfo.placeOfBirth || 'Sua Cidade'}</span></li>
-              <li className="flex items-center"><FaEnvelope className="mr-3 text-sky-700 text-4x1" /><span>{personalInfo.email || 'seu-email'}</span></li>
+              <li className="flex items-center"><FaEnvelope className="mr-3 text-sky-700 text-4x1" /><span>{personalInfo.email || 'Seu-email'}</span></li>
               <li className="flex items-center"><FaPhone className="mr-3 text-sky-700" /><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
-              <li className="flex items-center"><FaBirthdayCake className="mr-3 text-sky-700" /><span>{personalInfo.dateOfBirth || 'Data de Nascimento'}</span></li>
+          
+              <li className="flex items-center">
+                <FaBirthdayCake className="mr-3 text-sky-700" />
+                <span>{formatBrazilianDate(personalInfo.dateOfBirth)}</span>
+              </li>
               
               {personalInfo.linkedin && (
                 <li className="flex items-center">
@@ -84,7 +89,6 @@ const Preview: React.FC<Props> = ({ data }) => {
             </ul>
           </section>
 
-          {/* Rodapé azul */}
           <div className="absolute inset-x-0 bottom-0 h-5 bg-sky-700 rounded-t-[100px]"></div>
         </aside>
 

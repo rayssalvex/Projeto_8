@@ -21,7 +21,7 @@ const LanguagesForm: React.FC<Props> = ({ languages, setResumeData }) => {
   };
 
   const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
-  const buttonClasses = "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-90 transition-opacity duration-200 whitespace-nowrap";
+  const buttonClasses = "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-70 transition-opacity duration-200 whitespace-nowrap";
 
   return (
     <div className="p-4 border border-gray-700 rounded-lg">
