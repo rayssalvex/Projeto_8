@@ -1,14 +1,30 @@
-import { useState } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Form from './components/Form';
-import Preview from './components/Preview';
-import { ResumeData } from './types';
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Form from "./components/Form";
+import Preview from "./components/Preview";
+import HomePage from "./components/HomePage";
+import { ResumeData } from "./types";
 
 function App() {
-  const [resumeData, setResumeData] = useState<ResumeData>({
-    personalInfo: { name: '', email: '', phone: '', linkedin: '', github: '', dateOfBirth: '', placeOfBirth: '', gender: '', nationality: '', civilStatus: '', website: '', customField: '', photoUrl: '' },
+  const [showEditor, setShowEditor] = useState(false);
 
+  const [resumeData, setResumeData] = useState<ResumeData>({
+    personalInfo: {
+      name: "",
+      email: "",
+      phone: "",
+      linkedin: "",
+      github: "",
+      dateOfBirth: "",
+      placeOfBirth: "",
+      gender: "",
+      nationality: "",
+      civilStatus: "",
+      website: "",
+      customField: "",
+      photoUrl: "",
+    },
     skills: [],
     experiences: [],
     education: [],
@@ -17,26 +33,26 @@ function App() {
     certifications: [],
   });
 
+  if (!showEditor) {
+    return <HomePage onStart={() => setShowEditor(true)} />;
+  }
+
   return (
-    <div className="flex flex-col h-screen">
-      {/* Adiciona print:hidden para esconder a Navbar */}
+    <div className="flex flex-col h-screen bg-gray-900">
       <div className="print:hidden">
         <Navbar />
       </div>
 
       <main className="flex flex-1 overflow-hidden">
-        {/* Adiciona print:hidden para esconder toda a coluna do formulário */}
         <div className="w-1/2 overflow-y-auto print:hidden">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
         </div>
-        
-        {/* Adiciona print:w-full para o preview ocupar 100% da página na impressão */}
+
         <div className="w-1/2 overflow-y-auto print:w-full">
           <Preview data={resumeData} />
         </div>
       </main>
 
-      {/* Adiciona print:hidden para esconder o Footer */}
       <div className="print:hidden">
         <Footer />
       </div>

@@ -3,77 +3,209 @@
 @tailwind utilities;
 
 body {
-  background-color: #111827;
-  color: #d1d5db;
+  background-color: #111827; /* gray-900 */
+  color: #d1d5db; /* gray-300 */
+}
 
 .react-datepicker-popper {
-  z-index: 20; /* Garante que o calendário apareça acima de outros elementos */
+  z-index: 20;
 }
 
 .react-datepicker {
-  border: 1px solid #3b82f6; /* Cor da borda: gray-600 */
-  background-color: #D1CFCC; /* Cor de fundo: gray-800 */
-  font-family: 'Inter', sans-serif;
+  border: 1px solid #3b82f6;
+  background-color: #d1cfcc;
+  font-family: "Inter", sans-serif;
 }
+
 .react-datepicker__header {
-  background-color: #111827; /* Cor do cabeçalho: gray-900 */
-  border-bottom: 1px solid #4B5563; /* Cor da borda inferior: gray-600 */
+  background-color: #111827;
+  border-bottom: 1px solid #4b5563;
 }
+
 .react-datepicker__current-month,
 .react-datepicker__day-name {
-  color: #D1D5DB; /* Cor do texto: gray-300 */
+  color: #d1d5db;
 }
 
 .react-datepicker__navigation--previous,
 .react-datepicker__navigation--next {
-  background-color: #374151; /* Cor de fundo da navegação: gray-700 */
+  background-color: #374151;
   border: none;
 }
 
 .react-datepicker__day--selected {
-  background-color: #3b82f6 !important; /* Cor de seleção: primary */
+  background-color: #3b82f6 !important;
   color: #fff;
 }
 
 .react-datepicker__day--keyboard-selected {
-  background-color: #4338CA; /* Cor de navegação do teclado: Indigo-600 */
+  background-color: #4338ca;
 }
 
 .react-datepicker__day:hover {
-  background-color: #374151; /* Cor de fundo ao passar o mouse: gray-700 */
+  background-color: #374151;
   color: #fff;
 }
 
-}
-
 @media print {
-  /* NOVO: Define o tamanho da página e remove as margens padrão do navegador */
   @page {
     size: A4;
     margin: 0;
   }
 
-   /* Classe para esconder elementos na impressão */
   .no-print {
     display: none !important;
   }
 
-  /* Garante que o container do preview ocupe toda a página */
   .print-container {
     width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
   }
-  
-  /* Remove a sombra e o fundo cinza do preview na impressão */
+
   .print-preview-wrapper {
     padding: 0 !important;
     background-color: white !important;
   }
 
-  /* Força a impressão de cores e imagens de fundo */
   body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+}
+
+/* --- ESTILOS ADICIONADOS PARA A HOMEPAGE --- */
+.homepage-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.homepage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #374151; /* gray-700 */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f9fafb; /* gray-50 */
+}
+
+.main-nav a {
+  color: #9ca3af; /* gray-400 */
+  text-decoration: none;
+  margin-left: 24px;
+  transition: color 0.2s ease-in-out;
+}
+
+.main-nav a:hover {
+  color: #f9fafb; /* gray-50 */
+}
+
+.hero {
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 16px 0;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #9ca3af; /* gray-400 */
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.cta-button {
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  border: 1px solid #3b82f6; /* blue-500 */
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.cta-button:hover {
+  background-color: #60a5fa; /* blue-400 */
+  border-color: #60a5fa; /* blue-400 */
+}
+
+.hero-image-placeholder {
+  width: 400px;
+  height: 300px;
+  background: linear-gradient(
+    135deg,
+    #1f2937,
+    #111827
+  ); /* gray-800 to gray-900 */
+  border-radius: 8px;
+  border: 1px solid #374151; /* gray-700 */
+  display: none;
+}
+@media (min-width: 992px) {
+  .hero-image-placeholder {
+    display: block;
+  }
+}
+
+.features {
+  padding: 60px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 48px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  background-color: #1f2937; /* gray-800 */
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #374151; /* gray-700 */
+}
+
+.feature-card h4 {
+  font-size: 1.2rem;
+  margin: 16px 0 8px 0;
+  color: #f9fafb; /* gray-50 */
+}
+
+.feature-card p {
+  color: #9ca3af; /* gray-400 */
+  line-height: 1.6;
+}
+
+.homepage-footer {
+  text-align: center;
+  padding: 32px 0;
+  margin-top: 40px;
+  border-top: 1px solid #374151; /* gray-700 */
+  color: #9ca3af; /* gray-400 */
 }
