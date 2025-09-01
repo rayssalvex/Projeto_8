@@ -10,6 +10,7 @@ import EducationForm from './EducationForm';
 import LanguagesForm from './LanguagesForm';
 import VolunteeringForm from './VolunteeringForm';
 import CertificationsForm from './CertificationsForm';
+import brendaPhoto from '../image/Brenda-documento.png';
 
 interface Props {
   resumeData: ResumeData;
@@ -21,13 +22,13 @@ const Form: React.FC<Props> = ({ resumeData, setResumeData }) => {
   const handleLinkedInImport = () => {
     const mockLinkedInData: ResumeData = {
       personalInfo: {
-        photoUrl: '../src/image/Brenda-documento.png',
+        photoUrl: brendaPhoto,
         name: 'Brenda Oliveira',
         email: 'brenda@example.com',
         phone: '(47) 99876-5432',
         linkedin: 'https://linkedin.com/in/brenda-oliveira-dev',
         github: 'https://github.com/brenda-dev',
-        dateOfBirth: '15/05/1995',
+        dateOfBirth: '1995-05-15', // Formato AAAA-MM-DD para compatibilidade
         placeOfBirth: 'Joinville, SC',
         gender: 'Feminino',
         nationality: 'Brasileira',

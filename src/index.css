@@ -5,6 +5,45 @@
 body {
   background-color: #111827;
   color: #d1d5db;
+
+.react-datepicker-popper {
+  z-index: 20; /* Garante que o calendário apareça acima de outros elementos */
+}
+
+.react-datepicker {
+  border: 1px solid #3b82f6; /* Cor da borda: gray-600 */
+  background-color: #D1CFCC; /* Cor de fundo: gray-800 */
+  font-family: 'Inter', sans-serif;
+}
+.react-datepicker__header {
+  background-color: #111827; /* Cor do cabeçalho: gray-900 */
+  border-bottom: 1px solid #4B5563; /* Cor da borda inferior: gray-600 */
+}
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #D1D5DB; /* Cor do texto: gray-300 */
+}
+
+.react-datepicker__navigation--previous,
+.react-datepicker__navigation--next {
+  background-color: #374151; /* Cor de fundo da navegação: gray-700 */
+  border: none;
+}
+
+.react-datepicker__day--selected {
+  background-color: #3b82f6 !important; /* Cor de seleção: primary */
+  color: #fff;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #4338CA; /* Cor de navegação do teclado: Indigo-600 */
+}
+
+.react-datepicker__day:hover {
+  background-color: #374151; /* Cor de fundo ao passar o mouse: gray-700 */
+  color: #fff;
+}
+
 }
 
 @media print {

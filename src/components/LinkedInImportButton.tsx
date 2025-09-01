@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaLinkedin } from 'react-icons/fa'; // Importa o ícone
+import { FaLinkedin } from 'react-icons/fa';
 
 interface Props {
-  onClick: () => void; // A função que será chamada ao clicar
+  onClick: () => void;
 }
 
 const LinkedInImportButton: React.FC<Props> = ({ onClick }) => {
