@@ -49,7 +49,7 @@ const Preview: React.FC<Props> = ({ data }) => {
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-center"><FaUser className="mr-3 text-sky-700" /><span>{personalInfo.name || 'Seu Nome'}</span></li>
               <li className="flex items-center"><FaMapMarkerAlt className="mr-3 text-sky-700" /><span>{personalInfo.placeOfBirth || 'Sua Cidade'}</span></li>
-              <li className="flex items-center"><FaEnvelope className="mr-3 text-sky-700 text-4x1" /><span>{personalInfo.email || 'Seu-email'}</span></li>
+              <li className="flex items-center"><span className="mr-3 flex-shrink-0">📧</span><span className="break-all">{personalInfo.email || 'seu-email@exemplo.com'}</span></li>
               <li className="flex items-center"><FaPhone className="mr-3 text-sky-700" /><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
           
               <li className="flex items-center">
