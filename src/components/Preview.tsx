@@ -143,7 +143,7 @@ const Preview: React.FC<Props> = ({ data }) => {
           </section>
           {/* --- Seção de Experiências Profissionais --- */}
           <section className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiências Profissionais</h2>
+            <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiência Profissional</h2>
             <div className="space-y-4">
               {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm">
                 <div className="flex justify-between">
@@ -186,7 +186,7 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section>
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
             <div className="space-y-4">
-              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas certificações...</p>)}
+              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Sem certificações...</p>)}
             </div>
           </section>
           {/* --- Seção de Habilidades --- */}
