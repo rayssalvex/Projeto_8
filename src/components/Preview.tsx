@@ -28,7 +28,13 @@ const Preview: React.FC<Props> = ({ data }) => {
     return `${day}/${month}/${year}`;
   };
 
-  // Nova constante para padronizar o estilo de todos os ícones
+  const formatDate = (dateString: string) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short' };
+    return new Intl.DateTimeFormat('pt-BR', options).format(date);
+  };
+
   const iconClasses = "mr-3 text-sky-700 text-base flex-shrink-0"; 
 
   return (
@@ -106,7 +112,6 @@ const Preview: React.FC<Props> = ({ data }) => {
                   {/* Nível do idioma */}
                   <span className="text-gray-500 text-sm ml-1">{("(" + lang.level + ")")}</span>
                 </li>
-
                 )) : 
                 (
                 <li className="text-slate-500">Adicione idiomas...</li>)}
@@ -122,21 +127,56 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
             <div className="space-y-4">
-              {education.length > 0 ? (education.map((edu) => (<div key={edu.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{edu.course || 'Curso'}</p><p className="text-gray-600">{edu.period || 'Período'}</p></div><p className="italic">{edu.institution || 'Instituição'}</p></div>))) : (<p className="text-sm text-gray-500">Adicione sua formação...</p>)}
+              {education.length > 0 ? (education.map((edu) => (
+                <div key={edu.id} className="text-sm">
+                  <div className="flex justify-between"><p className="font-bold">{edu.course || 'Curso'}</p>
+                  <p className="text-gray-600">
+                    {edu.startDate ? formatDate(edu.startDate) : 'Período'}
+                    {edu.endDate ? ` - ${formatDate(edu.endDate)}` : ''}</p>
+                    </div>
+                    <p className="italic">{edu.institution || 'Instituição'}</p>
+                  </div>
+                ))) : (
+                <p className="text-sm text-gray-500">Adicione sua formação...</p>)}
             </div>
           </section>
 
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiências Profissionais</h2>
             <div className="space-y-4">
-              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{exp.role || 'Cargo'}</p><p className="text-gray-600">{exp.period || 'Período'}</p></div><p className="italic">{exp.company || 'Empresa, Local'}</p><p className="mt-1 leading-relaxed">{exp.description || 'Descrição da sua função.'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
+              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm">
+                <div className="flex justify-between">
+                  <p className="font-bold">{exp.role || 'Cargo'}</p>
+              <p className="text-gray-600">
+                {exp.startDate ? formatDate(exp.startDate) : 'Período'}
+                {exp.current ? ' - Presente' : (exp.endDate ? ` - ${formatDate(exp.endDate)}` : '')}
+              </p>
+              </div>
+              <p className="italic">{exp.company || 'Empresa, Local'}</p>
+              <p className="mt-1 leading-relaxed">{exp.description || 'Descrição da sua função.'}</p>
+              </div>
+              )) : (
+                <p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
             </div>
           </section>
 
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Voluntariado</h2>
             <div className="space-y-4">
-              {volunteering.length > 0 ? volunteering.map(vol => (<div key={vol.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{vol.role || 'Cargo'}</p><p className="text-gray-600">{vol.period || 'Período'}</p></div><p className="italic">{vol.organization || 'Organização'}</p><p className="mt-1 leading-relaxed">{vol.description || 'Descrição.'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
+              {volunteering.length > 0 ? volunteering.map(vol => (
+                <div key={vol.id} className="text-sm">
+                  <div className="flex justify-between">
+                    <p className="font-bold">{vol.role || 'Cargo'}</p>
+                    <p className="text-gray-600">
+                      {vol.startDate ? formatDate(vol.startDate) : 'Período'}
+                      {vol.endDate ? ` - ${formatDate(vol.endDate)}` : ''}
+                    </p>
+                    </div>
+                    <p className="italic">{vol.organization || 'Organização'}</p>
+                    <p className="mt-1 leading-relaxed">{vol.description || 'Descrição.'}</p>
+                    </div>
+                    )) : (
+                      <p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
             </div>
           </section>
 

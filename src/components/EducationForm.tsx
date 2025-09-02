@@ -8,7 +8,13 @@ interface Props {
 
 const EducationForm: React.FC<Props> = ({ education, setResumeData }) => {
   const handleAdd = () => {
-    const newEdu: Education = { id: crypto.randomUUID(), course: '', institution: '', period: '' };
+    const newEdu: Education = { 
+      id: crypto.randomUUID(), 
+      course: '', 
+      institution: '', 
+      startDate: '', 
+      endDate: ''
+    };
     setResumeData(prev => ({ ...prev, education: [...prev.education, newEdu] }));
   };
 
@@ -39,7 +45,23 @@ const EducationForm: React.FC<Props> = ({ education, setResumeData }) => {
             <button type="button" onClick={() => handleRemove(edu.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
             <input name="course" value={edu.course} onChange={(e) => handleChange(edu.id, e)} placeholder="Curso" className={`${inputClasses} mt-6`} />
             <input name="institution" value={edu.institution} onChange={(e) => handleChange(edu.id, e)} placeholder="Instituição" className={`${inputClasses} mt-4`} />
-            <input name="period" value={edu.period} onChange={(e) => handleChange(edu.id, e)} placeholder="Período" className={`${inputClasses} mt-4`} />
+            {/* Substituído o input de texto por dois seletores de data */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <input
+                type="date"
+                name="startDate"
+                value={edu.startDate}
+                onChange={(e) => handleChange(edu.id, e)}
+                className={inputClasses}
+              />
+              <input
+                type="date"
+                name="endDate"
+                value={edu.endDate}
+                onChange={(e) => handleChange(edu.id, e)}
+                className={inputClasses}
+              />
+            </div>
           </div>
         ))}
       </div>

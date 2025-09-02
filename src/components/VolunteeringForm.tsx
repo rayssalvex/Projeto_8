@@ -8,7 +8,14 @@ interface Props {
 
 const VolunteeringForm: React.FC<Props> = ({ volunteering, setResumeData }) => {
   const handleAdd = () => {
-    const newVol: Volunteering = { id: crypto.randomUUID(), organization: '', role: '', period: '', description: '' };
+    const newVol: Volunteering = { 
+      id: crypto.randomUUID(), 
+      organization: '', 
+      role: '', 
+      startDate: '', 
+      endDate: '', 
+      description: '' 
+    };
     setResumeData(prev => ({ ...prev, volunteering: [...prev.volunteering, newVol] }));
   };
 
@@ -41,7 +48,23 @@ const VolunteeringForm: React.FC<Props> = ({ volunteering, setResumeData }) => {
               <input name="role" value={vol.role} onChange={(e) => handleChange(vol.id, e)} placeholder="Cargo" className={`${inputClasses} mt-6`} />
               <input name="organization" value={vol.organization} onChange={(e) => handleChange(vol.id, e)} placeholder="Organização" className={`${inputClasses} mt-6`} />
             </div>
-            <input name="period" value={vol.period} onChange={(e) => handleChange(vol.id, e)} placeholder="Período" className={`${inputClasses} mt-4`} />
+            {/* Insere dois seletores de data*/}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <input 
+                type="date" 
+                name="startDate" 
+                value={vol.startDate} 
+                onChange={(e) => handleChange(vol.id, e)} 
+                className={inputClasses}
+              />
+              <input 
+                type="date" 
+                name="endDate" 
+                value={vol.endDate} 
+                onChange={(e) => handleChange(vol.id, e)} 
+                className={inputClasses}
+              />
+            </div>
             <textarea name="description" value={vol.description} onChange={(e) => handleChange(vol.id, e)} placeholder="Descrição" className={`${inputClasses} mt-4 h-20`}></textarea>
           </div>
         ))}
