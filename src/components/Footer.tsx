@@ -3,7 +3,7 @@ import React from 'react';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gradient-custom p-3 text-center text-white text-sm">
-      <p>Projeto-8, BotiCode. Desenvolvido com React, TypeScript e TailwindCSS.</p>
+      <p>&copy; {new Date().getFullYear()} Gerador de Currículo Inteligente. Desenvolvido por BotiCode.</p>
     </footer>
   );
 };

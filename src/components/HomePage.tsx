@@ -1,5 +1,5 @@
 import React from "react";
-import capaImage from "../image/capa.png";
+import capaImage from "../image/capa2.png";
 
 const FeatureIcon = () => (
   <svg
@@ -57,7 +57,7 @@ const HomePage: React.FC<HomePageProps> = ({ onStart }) => {
             <img
               src={capaImage}
               alt="Visualização de um currículo moderno"
-              className="w-full h-full object-cover"
+              className="h-full object-cover"
             />
           </div>
         </section>
