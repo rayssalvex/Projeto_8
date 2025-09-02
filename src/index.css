@@ -133,9 +133,9 @@ body {
 }
 
 .cta-button {
-  background-color: #3b82f6; /* blue-500 */
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
   color: white;
-  border: 1px solid #3b82f6; /* blue-500 */
+  border: none;
   padding: 14px 28px;
   font-size: 1rem;
   font-weight: 500;
@@ -145,8 +145,7 @@ body {
 }
 
 .cta-button:hover {
-  background-color: #60a5fa; /* blue-400 */
-  border-color: #60a5fa; /* blue-400 */
+  opacity: 70%;
 }
 
 .hero-image-placeholder {
