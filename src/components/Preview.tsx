@@ -161,6 +161,7 @@ const Preview: React.FC<Props> = ({ data }) => {
             </div>
           </section>
           {/* --- Seção de Voluntariado --- */}
+          {volunteering.length > 0 && (
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Voluntariado</h2>
             <div className="space-y-4">
@@ -180,6 +181,7 @@ const Preview: React.FC<Props> = ({ data }) => {
                       <p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
             </div>
           </section>
+          )}
           {/* --- Seção de Certificações --- */}
           <section>
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
