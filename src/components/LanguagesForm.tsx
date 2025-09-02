@@ -7,13 +7,21 @@ interface Props {
 }
 
 const LanguagesForm: React.FC<Props> = ({ languages, setResumeData }) => {
-  const [newLanguage, setNewLanguage] = useState('');
+  const [newLanguage, setNewLanguage] = useState({ name: '', level: 'Básico' });
 
   const handleAdd = () => {
-    if (newLanguage.trim() === '') return;
-    const langToAdd: Language = { id: crypto.randomUUID(), name: newLanguage };
-    setResumeData(prev => ({ ...prev, languages: [...prev.languages, langToAdd] }));
-    setNewLanguage('');
+    if (newLanguage.name.trim() === '') return;
+    const langToAdd: Language = { 
+      id: crypto.randomUUID(),
+      name: newLanguage.name,
+      level: newLanguage.level
+    };
+
+    setResumeData(prev => ({
+      ...prev,
+      languages: [...prev.languages, langToAdd]
+    }));
+    setNewLanguage({ name: '', level: 'Básico' });
   };
 
   const handleRemove = (id: string) => {
@@ -27,13 +35,35 @@ const LanguagesForm: React.FC<Props> = ({ languages, setResumeData }) => {
     <div className="p-4 border border-gray-700 rounded-lg">
       <h2 className="text-xl font-semibold mb-4 text-white">Idiomas</h2>
       <div className="flex gap-4 mb-4">
-        <input value={newLanguage} onChange={(e) => setNewLanguage(e.target.value)} placeholder="Ex: Inglês" className={`${inputClasses} flex-grow`} />
-        <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
+        {/* campo de texto para o idioma */}
+        <input 
+        value={newLanguage.name}
+        onChange={(e) => setNewLanguage({ ...newLanguage, name: e.target.value })}
+        placeholder='Ex: Inglês'
+        className={inputClasses}
+        />
+        {/* Campo de seleção para o nível */}
+
+        <select
+          value={newLanguage.level} // Acessa a prioridade 'level' do objeto newLanguage
+          onChange={(e) => setNewLanguage({ ...newLanguage, level: e.target.value })}
+          className={inputClasses}
+        >
+          <option value="Básico">Básico</option>
+          <option value="Intermediário">Intermediário</option>
+          <option value="Avançado">Avançado</option>
+          <option value="Fluente">Fluente</option>
+          <option value="Nativo">Nativo</option>
+        </select>
+
+        <button type="button" onClick={handleAdd} className={buttonClasses}>
+          Adicionar
+        </button>
       </div>
       <ul className="space-y-2">
         {languages.map(lang => (
           <li key={lang.id} className="flex justify-between items-center bg-gray-800 p-2 rounded">
-            <span>{lang.name}</span>
+            <span>{lang.name} - {lang.level}</span>
             <button type="button" onClick={() => handleRemove(lang.id)} className="text-red-500 hover:text-red-400">Remover</button>
           </li>
         ))}

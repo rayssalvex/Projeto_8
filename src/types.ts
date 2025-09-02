@@ -38,6 +38,7 @@ export interface Education {
 export interface Language {
   id: string;
   name: string;
+  level: string;
 }
 export interface Volunteering {
   id: string;
