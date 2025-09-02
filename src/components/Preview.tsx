@@ -28,53 +28,70 @@ const Preview: React.FC<Props> = ({ data }) => {
     return `${day}/${month}/${year}`;
   };
 
+  // Nova constante para padronizar o estilo de todos os ícones
+  const iconClasses = "mr-3 text-sky-700 text-base flex-shrink-0"; 
+
   return (
     <div className="bg-slate-700 p-8 font-sans print:p-0 print:bg-white">
       <div className="w-full max-w-4xl mx-auto bg-white shadow-lg flex min-h-[29.7cm] rounded-lg overflow-hidden">
         
         <aside className="w-1/3 bg-cream text-slate-700 p-6 relative flex flex-col items-center">
         
-        <div className="absolute top-0 left-0 right-0 h-5 bg-sky-700 rounded-b-[100px]"></div>
+          <div className="absolute top-0 left-0 right-0 h-5 bg-sky-700 rounded-b-[100px]"></div>
 
-        <div className="relative z-20 w-36 h-36 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mt-8 mb-2 shadow-md border-4 border-sky-700">
-          {personalInfo.photoUrl ? (
-            <img src={personalInfo.photoUrl} alt="Foto de Perfil" className="w-full h-full object-cover" />
-          ) : (
-            <FaUser className="text-white text-5xl" />
-          )}
-        </div>
+          <div className="relative z-20 w-36 h-36 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mt-8 mb-2 shadow-md border-4 border-sky-700">
+            {personalInfo.photoUrl ? (
+              <img src={personalInfo.photoUrl} alt="Foto de Perfil" className="w-full h-full object-cover" />
+            ) : (
+              <FaUser className="text-white text-5xl" />
+            )}
+          </div>
 
           <section className="mt-8 px-6 w-full">
             <h2 className="text-xl font-semibold border-b-2 border-slate-400 pb-2">Dados Pessoais</h2>
             <ul className="mt-4 space-y-3 text-sm">
-              <li className="flex items-center"><FaUser className="mr-3 text-sky-700" /><span>{personalInfo.name || 'Seu Nome'}</span></li>
-              <li className="flex items-center"><FaMapMarkerAlt className="mr-3 text-sky-700" /><span>{personalInfo.placeOfBirth || 'Sua Cidade'}</span></li>
-              <li className="flex items-center"><span className="mr-3 flex-shrink-0">📧</span><span className="break-all">{personalInfo.email || 'seu-email@exemplo.com'}</span></li>
-              <li className="flex items-center"><FaPhone className="mr-3 text-sky-700" /><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
+              <li className="flex items-center"><FaUser className={iconClasses} /><span>{personalInfo.name || 'Seu Nome'}</span></li>
+              <li className="flex items-center"><FaMapMarkerAlt className={iconClasses} /><span className="break-all">{personalInfo.placeOfBirth || 'Sua Cidade'}</span></li>
+              
+              <li className="flex items-center"><FaEnvelope className={iconClasses} /><span className="break-all">{personalInfo.email || 'seu-email@exemplo.com'}</span></li>
+              
+              <li className="flex items-center"><FaPhone className={iconClasses} /><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
           
-              <li className="flex items-center">
-                <FaBirthdayCake className="mr-3 text-sky-700" />
-                <span>{formatBrazilianDate(personalInfo.dateOfBirth)}</span>
-              </li>
+              <li className="flex items-center"><FaBirthdayCake className={iconClasses} /><span>{formatBrazilianDate(personalInfo.dateOfBirth)}</span></li>
               
               {personalInfo.linkedin && (
                 <li className="flex items-center">
-                  <FaLinkedin className="mr-3 text-sky-700 text-2xl" />
-                  <a href={`https://${personalInfo.linkedin.replace('https://', '').replace('http://', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline break-all">{personalInfo.linkedin.replace('https://www.', '')}</a>
+                  <FaLinkedin className={iconClasses} />
+                  <a 
+                    href={`https://linkedin.com/in/${personalInfo.linkedin.replace('https://', '').replace('http://', '').replace('www.', '').replace('linkedin.com/in/', '')}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:underline break-all"
+                  >
+                    {personalInfo.linkedin.replace('https://www.linkedin.com/in/', '')}
+                  </a>
                 </li>
               )}
+
               {personalInfo.github && (
                 <li className="flex items-center">
-                  <FaGithub className="mr-3 text-sky-700 text-xl" />
-                  <a href={`https://${personalInfo.github.replace('https://', '').replace('http://', '')}`} target="_blank" rel="noopener noreferrer" className="hover:underline break-all">{personalInfo.github.replace('https://www.', '')}</a>
+                  <FaGithub className={iconClasses} />
+                  <a 
+                    href={`https://github.com/${personalInfo.github.replace('https://', '').replace('http://', '').replace('github.com/', '')}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:underline break-all"
+                  >
+                    {personalInfo.github.replace('https://github.com/', '')}
+                  </a>
                 </li>
               )}
               
-              {personalInfo.gender && <li className="flex items-center"><FaVenusMars className="mr-3 text-sky-700" /><span>{personalInfo.gender}</span></li>}
-              {personalInfo.civilStatus && <li className="flex items-center"><FaRing className="mr-3 text-sky-700" /><span>{personalInfo.civilStatus}</span></li>}
-              {personalInfo.nationality && <li className="flex items-center"><FaFlag className="mr-3 text-sky-700" /><span>{personalInfo.nationality}</span></li>}
-              {personalInfo.website && <li className="flex items-center"><FaGlobe className="mr-3 text-sky-700" /><span><a href={personalInfo.website} className="hover:underline break-all">{personalInfo.website}</a></span></li>}
-              {personalInfo.customField && <li className="flex items-center"><FaPlus className="mr-3 text-sky-700" /><span>{personalInfo.customField}</span></li>}
+              {personalInfo.gender && <li className="flex items-center"><FaVenusMars className={iconClasses} /><span>{personalInfo.gender}</span></li>}
+              {personalInfo.civilStatus && <li className="flex items-center"><FaRing className={iconClasses} /><span>{personalInfo.civilStatus}</span></li>}
+              {personalInfo.nationality && <li className="flex items-center"><FaFlag className={iconClasses} /><span>{personalInfo.nationality}</span></li>}
+              {personalInfo.website && <li className="flex items-center"><FaGlobe className={iconClasses} /><span><a href={personalInfo.website} className="hover:underline break-all">{personalInfo.website}</a></span></li>}
+              {personalInfo.customField && <li className="flex items-center"><FaPlus className={iconClasses} /><span className="break-all">{personalInfo.customField}</span></li>}
             </ul>
           </section>
 
