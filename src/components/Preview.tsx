@@ -117,13 +117,14 @@ const Preview: React.FC<Props> = ({ data }) => {
                 <li className="text-slate-500">Adicione idiomas...</li>)}
             </ul>
           </section>
-
+          
           <div className="absolute inset-x-0 bottom-0 h-5 bg-sky-700 rounded-t-[100px]"></div>
+        
         </aside>
 
         <main className="w-2/3 flex-grow p-8 text-gray-700 bg-white">
           <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome Completo'}</h1>
-          
+          {/* --- Seção de Formação --- */}
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
             <div className="space-y-4">
@@ -140,7 +141,7 @@ const Preview: React.FC<Props> = ({ data }) => {
                 <p className="text-sm text-gray-500">Adicione sua formação...</p>)}
             </div>
           </section>
-
+          {/* --- Seção de Experiências Profissionais --- */}
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiências Profissionais</h2>
             <div className="space-y-4">
@@ -159,7 +160,7 @@ const Preview: React.FC<Props> = ({ data }) => {
                 <p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
             </div>
           </section>
-
+          {/* --- Seção de Voluntariado --- */}
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Voluntariado</h2>
             <div className="space-y-4">
@@ -179,13 +180,33 @@ const Preview: React.FC<Props> = ({ data }) => {
                       <p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
             </div>
           </section>
-
+          {/* --- Seção de Certificações --- */}
           <section>
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
             <div className="space-y-4">
               {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Adicione suas certificações...</p>)}
             </div>
           </section>
+          {/* --- Seção de Habilidades --- */}
+          {data.skills.length > 0 && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades</h2>
+              <div className="space-y-2">
+                {data.skills.map(skill => (
+                  <div key={skill.id} className="text-sm">
+                    <p className="font-bold">
+                      {skill.name}
+                      {skill.level && (
+                        <span className="ml-2 font-normal text-gray-500">
+                          ({skill.level})
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </main>
       </div>
     </div>
