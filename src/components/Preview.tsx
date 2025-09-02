@@ -189,15 +189,15 @@ const Preview: React.FC<Props> = ({ data }) => {
           </section>
           {/* --- Seção de Habilidades --- */}
           {data.skills.length > 0 && (
-            <section className="mb-6">
+            <section className="mt-3">
               <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades</h2>
-              <div className="space-y-2">
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
                 {data.skills.map(skill => (
                   <div key={skill.id} className="text-sm">
-                    <p className="font-bold">
+                    <p className="font-bold whitespace-nowrap">
                       {skill.name}
                       {skill.level && (
-                        <span className="ml-2 font-normal text-gray-500">
+                        <span className="ml-1 font-normal text-gray-500">
                           ({skill.level})
                         </span>
                       )}
