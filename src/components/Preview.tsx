@@ -100,9 +100,11 @@ const Preview: React.FC<Props> = ({ data }) => {
             <ul className="mt-4 space-y-2 text-sm">
               {languages.length > 0 ? (
                 languages.map(lang => 
-                <li key={lang.id} className="flex flex gap-2 items-center p-2">
-                  <span>{lang.name}</span>
-                  <span className="text-gray-500 text-sm">{("(" + lang.level + ")")}</span>
+                <li key={lang.id} className="flex flex-wrap p-2 rounded">
+                  {/* Nome do idioma */}
+                  <span className='break-words'>{lang.name}</span>
+                  {/* Nível do idioma */}
+                  <span className="text-gray-500 text-sm ml-1">{("(" + lang.level + ")")}</span>
                 </li>
 
                 )) : 
