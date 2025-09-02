@@ -9,7 +9,9 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-gradient-custom p-4 shadow-lg flex justify-between items-center">
-      <div className="w-24"></div>
+    <div>
+        <a href="" className='flex items-center gap-2 bg-transparente border border-white hover:opacity-90 hover:bg-[#5f90eb] text-white font-semibold py-2 px-4 rounded-lg transition-opacity duration-200 ml-2'>Home</a>
+      </div>
 
       <h1 className="text-2xl font-bold text-white text-center">
         Gerador de Currículo Inteligente
@@ -18,8 +20,7 @@ const Navbar: React.FC = () => {
       <div className="w-24 flex justify-end">
         <button
           onClick={handleDownload}
-         className="flex items-center gap-2 bg-sky-700 hover:opacity-90 text-white font-semibold py-2 px-4 rounded-lg transition-opacity duration-200"
-        >
+         className="flex items-center gap-2 bg-transparent border hover:opacity-90 hover:bg-[#9373e6] text-white font-semibold py-2 px-4 rounded-lg transition-opacity duration-200 mr-2">
           <FaDownload />
           <span>Baixar</span>
         </button>
