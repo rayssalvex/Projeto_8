@@ -8,7 +8,12 @@ interface Props {
 
 const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) => {
   const handleAdd = () => {
-    const newCert: Certification = { id: crypto.randomUUID(), name: '', organization: '', date: '' };
+    const newCert: Certification = {
+      id: crypto.randomUUID(),
+      name: '',
+      organization: '',
+      date: '',
+    };
     setResumeData(prev => ({ ...prev, certifications: [...prev.certifications, newCert] }));
   };
 
@@ -20,7 +25,9 @@ const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) 
     const { name, value } = e.target;
     setResumeData(prev => ({
       ...prev,
-      certifications: prev.certifications.map(cert => cert.id === id ? { ...cert, [name]: value } : cert)
+      certifications: prev.certifications.map(cert =>
+        cert.id === id ? { ...cert, [name]: value } : cert
+      ),
     }));
   };
 
@@ -33,13 +40,42 @@ const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) 
         <h2 className="text-xl font-semibold text-white">Certificações</h2>
         <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
       </div>
+
       <div className="space-y-4">
         {certifications.map(cert => (
           <div key={cert.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(cert.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
-            <input name="name" value={cert.name} onChange={(e) => handleChange(cert.id, e)} placeholder="Nome da Certificação" className={`${inputClasses} mt-6`} />
-            <input name="organization" value={cert.organization} onChange={(e) => handleChange(cert.id, e)} placeholder="Organização Emissora" className={`${inputClasses} mt-4`} />
-            <input name="date" value={cert.date} onChange={(e) => handleChange(cert.id, e)} placeholder="Data de Emissão" className={`${inputClasses} mt-4`} />
+            <button
+              type="button"
+              onClick={() => handleRemove(cert.id)}
+              className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold"
+            >
+              ⨉
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                name="name"
+                value={cert.name}
+                onChange={(e) => handleChange(cert.id, e)}
+                placeholder="Nome da Certificação"
+                className={`${inputClasses} mt-6`}
+              />
+              <input
+                name="organization"
+                value={cert.organization}
+                onChange={(e) => handleChange(cert.id, e)}
+                placeholder="Organização"
+                className={`${inputClasses} mt-6`}
+              />
+            </div>
+            <div className="mt-4">
+              <input
+                type="date"
+                name="date"
+                value={cert.date}
+                onChange={(e) => handleChange(cert.id, e)}
+                className={inputClasses}
+              />
+            </div>
           </div>
         ))}
       </div>

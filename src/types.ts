@@ -24,26 +24,31 @@ export interface Experience {
   id: string;
   company: string;
   role: string;
-  period: string;
+  startDate: string;
+  endDate: string;
   description: string;
+  current: boolean;
 }
 
 export interface Education {
   id: string;
   course: string;
   institution: string;
-  period: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Language {
   id: string;
   name: string;
+  level: string;
 }
 export interface Volunteering {
   id: string;
   organization: string;
   role: string;
-  period: string;
+  startDate: string;
+  endDate: string;
   description: string;
 }
 
