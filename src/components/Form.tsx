@@ -122,12 +122,12 @@ const Form: React.FC<Props> = ({ resumeData, setResumeData }) => {
       </div>
 
       <PersonalDataForm personalInfo={resumeData.personalInfo} setResumeData={setResumeData} />
-      <EducationForm education={resumeData.education} setResumeData={setResumeData} />
       <LanguagesForm languages={resumeData.languages} setResumeData={setResumeData} />
-      <SkillsForm skills={resumeData.skills} setResumeData={setResumeData} />
+      <EducationForm education={resumeData.education} setResumeData={setResumeData} />
       <ExperienceForm experiences={resumeData.experiences} setResumeData={setResumeData} />
       <VolunteeringForm volunteering={resumeData.volunteering} setResumeData={setResumeData} />
       <CertificationsForm certifications={resumeData.certifications} setResumeData={setResumeData} />
+      <SkillsForm skills={resumeData.skills} setResumeData={setResumeData} />
     </div>
   );
 };
