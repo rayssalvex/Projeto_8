@@ -1,4 +1,6 @@
-import React from 'react';
+// src/components/CertificationsForm.tsx
+
+import React, { useState } from 'react';
 import { ResumeData, Certification } from '../types';
 
 interface Props {
@@ -7,21 +9,22 @@ interface Props {
 }
 
 const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) => {
+  const [newCertification, setNewCertification] = useState({ name: '', organization: '', date: '' });
+
   const handleAdd = () => {
-    const newCert: Certification = { id: crypto.randomUUID(), name: '', organization: '', date: '' };
-    setResumeData(prev => ({ ...prev, certifications: [...prev.certifications, newCert] }));
+    if (newCertification.name.trim() === '' || newCertification.organization.trim() === '') return;
+    const certToAdd: Certification = { ...newCertification, id: crypto.randomUUID() };
+    setResumeData(prev => ({ ...prev, certifications: [...prev.certifications, certToAdd] }));
+    setNewCertification({ name: '', organization: '', date: '' });
   };
 
   const handleRemove = (id: string) => {
     setResumeData(prev => ({ ...prev, certifications: prev.certifications.filter(cert => cert.id !== id) }));
   };
 
-  const handleChange = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setResumeData(prev => ({
-      ...prev,
-      certifications: prev.certifications.map(cert => cert.id === id ? { ...cert, [name]: value } : cert)
-    }));
+    setNewCertification(prev => ({ ...prev, [name]: value }));
   };
 
   const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
@@ -29,20 +32,30 @@ const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) 
 
   return (
     <div className="p-4 border border-gray-700 rounded-lg">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold text-white">Certificações</h2>
-        <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
+      <h2 className="text-xl font-semibold mb-4 text-white">Certificações</h2>
+      <div className="flex gap-4 mb-4">
+        <input name="name" value={newCertification.name} onChange={handleChange} placeholder="Nome da Certificação" className={`${inputClasses} flex-grow`} />
+        <input name="organization" value={newCertification.organization} onChange={handleChange} placeholder="Organização" className={`${inputClasses} flex-grow`} />
       </div>
-      <div className="space-y-4">
+      {/* Campo de seleção de data adicionado aqui */}
+      <div className="mb-4">
+        <input
+          type="date"
+          name="date"
+          value={newCertification.date}
+          onChange={handleChange}
+          className={inputClasses}
+        />
+      </div>
+      <button type="button" onClick={handleAdd} className={buttonClasses}>Adicionar</button>
+      <ul className="space-y-2 mt-4">
         {certifications.map(cert => (
-          <div key={cert.id} className="p-3 border border-gray-600 rounded-md relative">
-            <button type="button" onClick={() => handleRemove(cert.id)} className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold">⨉</button>
-            <input name="name" value={cert.name} onChange={(e) => handleChange(cert.id, e)} placeholder="Nome da Certificação" className={`${inputClasses} mt-6`} />
-            <input name="organization" value={cert.organization} onChange={(e) => handleChange(cert.id, e)} placeholder="Organização Emissora" className={`${inputClasses} mt-4`} />
-            <input name="date" value={cert.date} onChange={(e) => handleChange(cert.id, e)} placeholder="Data de Emissão" className={`${inputClasses} mt-4`} />
-          </div>
+          <li key={cert.id} className="flex justify-between items-center bg-gray-800 p-2 rounded">
+            <span>{cert.name} - {cert.organization} ({cert.date})</span>
+            <button type="button" onClick={() => handleRemove(cert.id)} className="text-red-500 hover:text-red-400">Remover</button>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
