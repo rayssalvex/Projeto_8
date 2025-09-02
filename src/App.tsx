@@ -9,6 +9,10 @@ import { ResumeData } from "./types";
 function App() {
   const [showEditor, setShowEditor] = useState(false);
 
+  const handleBack = () => {
+    setShowEditor(false);
+  };
+
   const [resumeData, setResumeData] = useState<ResumeData>({
     personalInfo: {
       name: "",
@@ -39,8 +43,9 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen bg-gray-900">
+      
       <div className="print:hidden">
-        <Navbar />
+        <Navbar onBack={handleBack} />
       </div>
 
       <main className="flex flex-1 overflow-hidden">
