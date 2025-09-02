@@ -15,7 +15,7 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
       startDate: '', 
       endDate: '', 
       description: '',
-      current: false
+      current: false,
     };
     setResumeData(prev => ({ ...prev, experiences: [...prev.experiences, newExp] }));
   };
@@ -26,14 +26,21 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
 
   const handleChange = (id: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-
+    
+    // NOVO: Verifica o tipo do input e obtém o valor correto (checked ou value)
+    const newValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
+  
     setResumeData(prev => ({
       ...prev,
       experiences: prev.experiences.map(exp => {
         if (exp.id === id) {
-          // Lógica para lidar com checkbox
-          const newValue = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-          return { ...exp, [name]: newValue };
+          const updatedExp = { ...exp, [name]: newValue };
+  
+          // Lógica para limpar endDate quando 'current' é marcado
+          if (name === 'current' && newValue === true) {
+            updatedExp.endDate = '';
+          }
+          return updatedExp;
         }
         return exp;
       }),
@@ -66,16 +73,16 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
                 onChange={(e) => handleChange(exp.id, e)} 
                 className={inputClasses} 
               />
-              <input 
-                type="date" 
-                name="endDate" 
-                value={exp.endDate} 
-                onChange={(e) => handleChange(exp.id, e)} 
-                className={inputClasses} 
+              <input
+                type="date"
+                name="endDate"
+                value={exp.endDate}
+                onChange={(e) => handleChange(exp.id, e)}
+                disabled={exp.current}
+                className={`${inputClasses} ${exp.current ? 'bg-gray-700 cursor-not-allowed' : ''}`}
               />
             </div>
             
-            {/* Campo para "Emprego Atual" */}
             <div className="flex items-center mt-4">
               <input
                 type="checkbox"
