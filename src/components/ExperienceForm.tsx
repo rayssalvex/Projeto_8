@@ -1,6 +1,6 @@
 import React from "react";
 import { ResumeData, Experience } from "../types";
-import { improveText } from "./Gemini";
+import { improveText } from "../Gemini";
 
 interface Props {
   experiences: Experience[];
