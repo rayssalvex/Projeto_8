@@ -29,7 +29,7 @@ const VolunteeringForm: React.FC<Props> = ({ volunteering, setResumeData }) => {
     const improved = await improveText(text);
     setResumeData((prev) => ({
       ...prev,
-      experiences: prev.experiences.map((e) => (e.id === id ? { ...e, description: improved } : e)),
+      volunteering: prev.volunteering.map((e) => (e.id === id ? { ...e, description: improved } : e)),
     }));
   };
 
