@@ -92,7 +92,7 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
               <button
                 type="button"
                 onClick={() => handleImprove(exp.id, exp.description)}
-                className="h-20 w-20 text-sm bg-gradient-custom text-white text-sm font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
+                className="h-20 w-20 text-sm bg-gradient-custom text-white font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
               >
                 Revisar texto
               </button>

@@ -90,8 +90,8 @@ const VolunteeringForm: React.FC<Props> = ({ volunteering, setResumeData }) => {
 
               <button
                 type="button"
-                onClick={() => handleImprove(exp.id, exp.description)}
-                className="h-20 w-20 text-sm bg-gradient-custom text-white text-sm font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
+                onClick={() => handleImprove(vol.id, vol.description)}
+                className="h-20 w-20 bg-gradient-custom text-white text-sm font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
               >
                 Revisar texto
               </button>
