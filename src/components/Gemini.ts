@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
 export async function improveText(text: string) {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 

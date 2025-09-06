@@ -91,16 +91,9 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
 
               <button
                 type="button"
-                onClick={async () => {
-                  const improved = await improveText(exp.description);
-                  setResumeData((prev) => ({
-                    ...prev,
-                    experiences: prev.experiences.map((e) => (e.id === exp.id ? { ...e, description: improved } : e)),
-                  }));
-                }}
+                onClick={() => handleImprove(exp.id, exp.description)}
                 className="h-20 w-20 text-sm bg-gradient-custom text-white text-sm font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
               >
-                {" "}
                 Revisar texto
               </button>
             </div>
