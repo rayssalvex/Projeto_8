@@ -3,7 +3,7 @@ export async function improveText(text: string) {
 
   try {
     const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -36,5 +36,46 @@ export async function improveText(text: string) {
   } catch (error) {
     console.error("Erro ao melhorar o texto:", error);
     return `⚠️ Não foi possível melhorar o texto automaticamente. Tente novamente mais tarde ou revise manualmente.`;
+  }
+}
+
+export async function generateProfessionalSummary(currentText: string) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              role: "user",
+              parts: [
+                {
+                  text: `Com base nas seguintes ideias, gere um resumo profissional conciso e impactante para um currículo. Se as ideias estiverem vazias, crie um exemplo de resumo para um desenvolvedor de software. Retorne apenas o texto final, sem explicações ou formatação especial (como negrito ou asteriscos): "${currentText}"`,
+                },
+              ],
+            },
+          ],
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData?.error?.message || "Erro desconhecido da API.");
+    }
+
+    const data = await res.json();
+    let resposta = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+
+    resposta = resposta.replace(/\*/g, "").trim();
+
+    return resposta;
+  } catch (error) {
+    console.error("Erro ao gerar resumo:", error);
+    return `⚠️ Erro ao gerar resumo. Verifique a API Key ou tente novamente.`;
   }
 }
