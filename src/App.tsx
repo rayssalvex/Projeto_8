@@ -25,6 +25,7 @@ function App() {
       customField: "",
       photoUrl: "",
     },
+    summary: "",
     skills: [],
     experiences: [],
     education: [],

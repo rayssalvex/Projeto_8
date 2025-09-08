@@ -20,7 +20,8 @@ interface Props {
 }
 
 const Preview: React.FC<Props> = ({ data }) => {
-  const { personalInfo, experiences, education, languages, volunteering, certifications } = data;
+  // ✅ 1. Desestruture 'summary' junto com os outros dados
+  const { personalInfo, summary, experiences, education, languages, volunteering, certifications } = data;
 
   const formatBrazilianDate = (dateString: string) => {
     if (!dateString) return 'Data de Nascimento';
@@ -62,7 +63,7 @@ const Preview: React.FC<Props> = ({ data }) => {
               <li className="flex items-center"><FaEnvelope className={iconClasses} /><span className="break-all">{personalInfo.email || 'seu-email@exemplo.com'}</span></li>
               
               <li className="flex items-center"><FaPhone className={iconClasses} /><span>{personalInfo.phone || 'Seu Telefone'}</span></li>
-          
+        
               <li className="flex items-center"><FaBirthdayCake className={iconClasses} /><span>{formatBrazilianDate(personalInfo.dateOfBirth)}</span></li>
               
               {personalInfo.linkedin && (
@@ -124,6 +125,15 @@ const Preview: React.FC<Props> = ({ data }) => {
 
         <main className="w-2/3 flex-grow p-8 text-gray-700 bg-white">
           <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome Completo'}</h1>
+          
+          {/* ✅ 2. ADICIONE A NOVA SEÇÃO DE RESUMO PROFISSIONAL AQUI */}
+          {summary && (
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Resumo Profissional</h2>
+              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{summary}</p>
+            </section>
+          )}
+
           {/* --- Seção de Formação --- */}
           <section className="mb-6">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
