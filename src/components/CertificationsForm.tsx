@@ -48,6 +48,7 @@ const CertificationsForm: React.FC<Props> = ({ certifications, setResumeData }) 
               type="button"
               onClick={() => handleRemove(cert.id)}
               className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold"
+              title='Remover'
             >
               ⨉
             </button>
