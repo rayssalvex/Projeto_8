@@ -40,16 +40,19 @@ function App() {
 
   return (
     <div className="flex flex-col h-screen bg-gray-900">
+      {/* Esconde Navbar e Footer na impressão */}
       <div className="print:hidden">
         <Navbar />
       </div>
-
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex flex-1 overflow-hidden print:block print:overflow-visible">
+        
+        {/* Esconde a coluna do formulário na impressão */}
         <div className="w-1/2 overflow-y-auto print:hidden">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
         </div>
 
-        <div className="w-1/2 overflow-y-auto print:w-full">
+        {/* Expande a coluna do preview na impressão e permite que o conteúdo cresça */}
+        <div className="w-1/2 overflow-y-auto print:w-full print:overflow-visible print:h-auto">
           <Preview data={resumeData} />
         </div>
       </main>
