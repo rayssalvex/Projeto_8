@@ -53,6 +53,7 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
               type="button"
               onClick={() => handleRemove(exp.id)}
               className="absolute top-2 right-3 text-red-500 hover:text-red-400 font-bold"
+              title="Remover"
             >
               ⨉
             </button>
@@ -91,10 +92,28 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
 
               <button
                 type="button"
-                onClick={() => handleImprove(exp.id, exp.description)}
-                className="h-20 w-20 text-sm bg-gradient-custom text-white font-bold p-2 rounded-md hover:opacity-70 transition-opacity duration-200"
+                onClick={async (e) => {
+                  const btn = e.currentTarget;
+                  btn.classList.add("loading");
+                  await handleImprove(exp.id, exp.description);
+                  btn.classList.remove("loading");
+                }}
+                className="improve-btn h-20 w-20 text-sm bg-gradient-custom text-white font-bold p-3 rounded-md hover:opacity-70 transition-opacity duration-200"
               >
-                Revisar texto
+                <span className="default flex flex-col items-center justify-center">
+                  <img
+                    className="invert mb-1"
+                    width="16"
+                    height="16"
+                    src="https://img.icons8.com/fluency-systems-regular/48/sparkling--v1.png"
+                    alt="sparkling--v1"
+                  />
+                  Melhorar com IA
+                </span>
+                <span className="loading hidden ">
+                  <div className="animate-spin rounded-full h-5 w-5 border-4 border-white border-t-transparent mb-1 "></div>
+                  Gerando...
+                </span>
               </button>
             </div>
           </div>
@@ -103,5 +122,6 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
     </div>
   );
 };
+
 
 export default ExperienceForm;

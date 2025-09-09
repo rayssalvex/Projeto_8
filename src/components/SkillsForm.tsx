@@ -42,7 +42,8 @@ const SkillsForm: React.FC<Props> = ({ skills, setResumeData }) => {
         {skills.map(skill => (
           <li key={skill.id} className="flex justify-between items-center bg-gray-800 p-2 rounded">
             <span>{skill.name} ({skill.level})</span>
-            <button type="button" onClick={() => handleRemove(skill.id)} className="text-red-500 hover:text-red-400">Remover</button>
+            <button type="button" onClick={() => handleRemove(skill.id)} className="text-red-500 hover:text-red-400 font-bold"
+              title='Remover'>⨉</button>
           </li>
         ))}
       </ul>

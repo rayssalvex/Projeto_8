@@ -64,7 +64,8 @@ const LanguagesForm: React.FC<Props> = ({ languages, setResumeData }) => {
         {languages.map(lang => (
           <li key={lang.id} className="flex justify-between items-center bg-gray-800 p-2 rounded">
             <span>{lang.name} - {lang.level}</span>
-            <button type="button" onClick={() => handleRemove(lang.id)} className="text-red-500 hover:text-red-400">Remover</button>
+            <button type="button" onClick={() => handleRemove(lang.id)} className="text-red-500 hover:text-red-400 font-bold"
+              title='Remover'>⨉</button>
           </li>
         ))}
       </ul>
