@@ -44,12 +44,12 @@ function App() {
         <Navbar />
       </div>
 
-      <main className="flex flex-1 overflow-hidden">
+      <main className="flex flex-1 overflow-hidden print:block print:overflow-visible">
         <div className="w-1/2 overflow-y-auto print:hidden">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
         </div>
 
-        <div className="w-1/2 overflow-y-auto print:w-full">
+        <div className="w-1/2 overflow-y-auto print:w-full print:overflow-visible print:h-auto">
           <Preview data={resumeData} />
         </div>
       </main>
