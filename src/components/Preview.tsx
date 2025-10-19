@@ -20,7 +20,6 @@ interface Props {
 }
 
 const Preview: React.FC<Props> = ({ data }) => {
-  // ✅ 1. Desestruture 'summary' junto com os outros dados
   const { personalInfo, summary, experiences, education, languages, volunteering, certifications } = data;
 
   const formatBrazilianDate = (dateString: string) => {
@@ -46,7 +45,7 @@ const Preview: React.FC<Props> = ({ data }) => {
         
           <div className="absolute top-0 left-0 right-0 h-5 bg-sky-700 rounded-b-[100px]"></div>
 
-          <div className="relative z-20 w-36 h-36 rounded-full bg-sky-700 flex items-center justify-center overflow-hidden mt-8 mb-2 shadow-md border-4 border-sky-700">
+          <div className="relative z-20 w-36 h-36 rounded-full bg-sky-700 flex items-center justify-center mt-8 mb-2 shadow-md border-4 border-sky-700 overflow-hidden">
             {personalInfo.photoUrl ? (
               <img src={personalInfo.photoUrl} alt="Foto de Perfil" className="w-full h-full object-cover" />
             ) : (
@@ -122,16 +121,16 @@ const Preview: React.FC<Props> = ({ data }) => {
           <div className="absolute inset-x-0 bottom-0 h-5 bg-sky-700 rounded-t-[100px]"></div>
         
         </aside>
-
+      {/* --- Conteúdo Principal --- */}
         <main className="w-2/3 flex-grow p-8 text-gray-700 bg-white">
           <h1 className="text-5xl font-bold text-slate-800 mb-8">{personalInfo.name || 'Nome Completo'}</h1>
+          {/* --- Seção de Resumo Profissional --- */}
           {summary && (
             <section className="mb-6 break-inside-avoid-page">
               <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Resumo Profissional</h2>
               <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-wrap">{summary}</p>
             </section>
           )}
-
           {/* --- Seção de Formação --- */}
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
@@ -139,12 +138,12 @@ const Preview: React.FC<Props> = ({ data }) => {
               {education.length > 0 ? (education.map((edu) => (
                 <div key={edu.id} className="text-sm break-inside-avoid">
                   <div className="flex justify-between"><p className="font-bold">{edu.course || 'Curso'}</p>
-                  <p className="text-gray-600">
+                    <p className="text-gray-600">
                     {edu.startDate ? formatDate(edu.startDate) : 'Período'}
                     {edu.endDate ? ` - ${formatDate(edu.endDate)}` : ''}</p>
-                    </div>
-                    <p className="italic">{edu.institution || 'Instituição'}</p>
                   </div>
+                  <p className="italic">{edu.institution || 'Instituição'}</p>
+                </div>
                 ))) : (
                 <p className="text-sm text-gray-500">Adicione sua formação...</p>)}
             </div>
@@ -153,19 +152,20 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiência Profissional</h2>
             <div className="space-y-4">
-              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm break-inside-avoid">
-                <div className="flex justify-between">
-                  <p className="font-bold">{exp.role || 'Cargo'}</p>
-              <p className="text-gray-600">
-                {exp.startDate ? formatDate(exp.startDate) : 'Período'}
-                {exp.current ? ' - Presente' : (exp.endDate ? ` - ${formatDate(exp.endDate)}` : '')}
-              </p>
-              </div>
-              <p className="italic">{exp.company || 'Empresa, Local'}</p>
-              <p className="mt-1 leading-relaxed">{exp.description || 'Descrição da sua função.'}</p>
-              </div>
-              )) : (
-                <p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
+
+              {experiences.length > 0 ? experiences.map(exp => (
+                <div key={exp.id} className="text-sm break-inside-avoid">
+                  <div className="flex justify-between">
+                    <p className="font-bold">{exp.role || 'Cargo'}</p>
+                    <p className="text-gray-600">
+                    {exp.startDate ? formatDate(exp.startDate) : 'Período'}
+                    {exp.current ? ' - Presente' : (exp.endDate ? ` - ${formatDate(exp.endDate)}` : '')}
+                    </p>
+                  </div>
+                  <p className="italic">{exp.company || 'Empresa, Local'}</p>
+                  <p className="mt-1 leading-relaxed">{exp.description || 'Descrição da sua função.'}</p>
+                </div>
+                )) : (<p className="text-sm text-gray-500">Adicione suas experiências...</p>)}
             </div>
           </section>
           {/* --- Seção de Voluntariado --- */}
@@ -181,12 +181,11 @@ const Preview: React.FC<Props> = ({ data }) => {
                       {vol.startDate ? formatDate(vol.startDate) : 'Período'}
                       {vol.endDate ? ` - ${formatDate(vol.endDate)}` : ''}
                     </p>
-                    </div>
-                    <p className="italic">{vol.organization || 'Organização'}</p>
-                    <p className="mt-1 leading-relaxed">{vol.description || 'Descrição.'}</p>
-                    </div>
-                    )) : (
-                      <p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
+                  </div>
+                  <p className="italic">{vol.organization || 'Organização'}</p>
+                  <p className="mt-1 leading-relaxed">{vol.description || 'Descrição.'}</p>
+                </div>
+                    )) : (<p className="text-sm text-gray-500">Adicione suas experiências de voluntariado...</p>)}
             </div>
           </section>
           )}
@@ -194,7 +193,15 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
             <div className="space-y-4">
-              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm break-inside-avoid"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Sem certificações...</p>)}
+              {certifications.length > 0 ? certifications.map(cert => (
+                <div key={cert.id} className="text-sm break-inside-avoid">
+                  <div className="flex justify-between">
+                    <p className="font-bold">{cert.name || 'Nome da Certificação'}</p>
+                    <p className="text-gray-600">{cert.date || 'Data'}</p>
+                  </div>
+                  <p className="italic">{cert.organization || 'Organização Emissora'}</p>
+                </div>)
+                  ) : (<p className="text-sm text-gray-500">Sem certificações...</p>)}
             </div>
           </section>
           {/* --- Seção de Habilidades --- */}

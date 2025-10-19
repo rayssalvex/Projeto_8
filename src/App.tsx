@@ -45,12 +45,10 @@ function App() {
         <Navbar />
       </div>
       <main className="flex flex-1 overflow-hidden print:block print:overflow-visible">
-        
         {/* Esconde a coluna do formulário na impressão */}
         <div className="w-1/2 overflow-y-auto print:hidden">
           <Form resumeData={resumeData} setResumeData={setResumeData} />
         </div>
-
         {/* Expande a coluna do preview na impressão e permite que o conteúdo cresça */}
         <div className="w-1/2 overflow-y-auto print:w-full print:overflow-visible print:h-auto">
           <Preview data={resumeData} />
