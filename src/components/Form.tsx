@@ -38,7 +38,8 @@ const Form: React.FC<Props> = ({ resumeData, setResumeData }) => {
         nationality: 'Brasileira',
         civilStatus: 'Solteira',
         website: 'https://seusite.com',
-        customField: 'Disponibilidade para realocação'
+        customField: 'Disponibilidade para realocação',
+        placeOfResidence: undefined
       },
       summary: 'Desenvolvedora front-end com mais de 4 anos de experiência, especializada em criar interfaces de usuário dinâmicas e responsivas com React e TypeScript. Apaixonada por entregar código limpo, testável e de alta performance, sempre buscando aprender novas tecnologias e colaborar em equipes ágeis.',
       skills: [

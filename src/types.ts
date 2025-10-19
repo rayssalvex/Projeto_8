@@ -1,4 +1,5 @@
 export interface PersonalInfo {
+  placeOfResidence: string | number | readonly string[] | undefined;
   photoUrl: any;
   name: string;
   email: string;
@@ -26,8 +27,8 @@ export interface Experience {
   role: string;
   startDate: string;
   endDate: string;
-  description: string;
   current: boolean;
+  description: string;
 }
 
 export interface Education {

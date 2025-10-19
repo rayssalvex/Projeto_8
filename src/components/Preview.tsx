@@ -137,7 +137,7 @@ const Preview: React.FC<Props> = ({ data }) => {
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Formação</h2>
             <div className="space-y-4">
               {education.length > 0 ? (education.map((edu) => (
-                <div key={edu.id} className="text-sm">
+                <div key={edu.id} className="text-sm break-inside-avoid">
                   <div className="flex justify-between"><p className="font-bold">{edu.course || 'Curso'}</p>
                   <p className="text-gray-600">
                     {edu.startDate ? formatDate(edu.startDate) : 'Período'}
@@ -153,7 +153,7 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiência Profissional</h2>
             <div className="space-y-4">
-              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm">
+              {experiences.length > 0 ? experiences.map(exp => (<div key={exp.id} className="text-sm break-inside-avoid">
                 <div className="flex justify-between">
                   <p className="font-bold">{exp.role || 'Cargo'}</p>
               <p className="text-gray-600">
@@ -174,7 +174,7 @@ const Preview: React.FC<Props> = ({ data }) => {
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Voluntariado</h2>
             <div className="space-y-4">
               {volunteering.length > 0 ? volunteering.map(vol => (
-                <div key={vol.id} className="text-sm">
+                <div key={vol.id} className="text-sm break-inside-avoid">
                   <div className="flex justify-between">
                     <p className="font-bold">{vol.role || 'Cargo'}</p>
                     <p className="text-gray-600">
@@ -194,7 +194,7 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Certificações</h2>
             <div className="space-y-4">
-              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Sem certificações...</p>)}
+              {certifications.length > 0 ? certifications.map(cert => (<div key={cert.id} className="text-sm break-inside-avoid"><div className="flex justify-between"><p className="font-bold">{cert.name || 'Nome da Certificação'}</p><p className="text-gray-600">{cert.date || 'Data'}</p></div><p className="italic">{cert.organization || 'Organização Emissora'}</p></div>)) : (<p className="text-sm text-gray-500">Sem certificações...</p>)}
             </div>
           </section>
           {/* --- Seção de Habilidades --- */}
@@ -203,7 +203,7 @@ const Preview: React.FC<Props> = ({ data }) => {
               <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades</h2>
               <div className="flex flex-wrap gap-x-6 gap-y-2">
                 {data.skills.map(skill => (
-                  <div key={skill.id} className="text-sm">
+                  <div key={skill.id} className="text-sm break-inside-avoid">
                     <p className="font-bold whitespace-nowrap">
                       {skill.name}
                       {skill.level && (
