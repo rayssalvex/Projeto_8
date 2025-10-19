@@ -125,7 +125,7 @@ const PersonalDataForm: React.FC<Props> = ({ personalInfo, setResumeData }) => {
           onChange={handleChange}
           className={inputClasses}
         >
-          <option value="" disabled>Selecione o Gênero</option>
+          <option value="">Selecione o Gênero</option>
           <option value="Masculino">Masculino</option>
           <option value="Feminino">Feminino</option>
           <option value="Não-binário">Não Binário</option>
@@ -137,7 +137,7 @@ const PersonalDataForm: React.FC<Props> = ({ personalInfo, setResumeData }) => {
           onChange={handleChange} 
           className={inputClasses}
         >
-          <option value="" disabled>Selecione o Estado Civil</option>
+          <option value="">Selecione o Estado Civil</option>
           <option value="Solteiro">Solteiro(a)</option>
           <option value="Casado">Casado(a)</option>
           <option value="Divorciado">Divorciado(a)</option>
@@ -146,10 +146,10 @@ const PersonalDataForm: React.FC<Props> = ({ personalInfo, setResumeData }) => {
            <option value="União Estável">União Estável</option>
         </select>
         <input
-          name="placeOfBirth"
-          value={personalInfo.placeOfBirth}
+          name="placeOfResidence"
+          value={personalInfo.placeOfResidence}
           onChange={handleChange}
-          placeholder="Local de Nascimento"
+          placeholder="Residência (Cidade, Estado)"
           className={inputClasses}
         />
         <input

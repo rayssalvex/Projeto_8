@@ -152,6 +152,7 @@ const Preview: React.FC<Props> = ({ data }) => {
           <section className="mb-6 break-inside-avoid-page">
             <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Experiência Profissional</h2>
             <div className="space-y-4">
+
               {experiences.length > 0 ? experiences.map(exp => (
                 <div key={exp.id} className="text-sm break-inside-avoid">
                   <div className="flex justify-between">
@@ -209,7 +210,7 @@ const Preview: React.FC<Props> = ({ data }) => {
               <h2 className="text-2xl font-bold text-slate-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades</h2>
               <div className="flex flex-wrap gap-x-6 gap-y-2">
                 {data.skills.map(skill => (
-                  <div key={skill.id} className="text-sm">
+                  <div key={skill.id} className="text-sm break-inside-avoid">
                     <p className="font-bold whitespace-nowrap">
                       {skill.name}
                       {skill.level && (

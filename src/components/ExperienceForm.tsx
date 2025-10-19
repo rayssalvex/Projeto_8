@@ -9,7 +9,7 @@ interface Props {
 
 const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
   const handleAdd = () => {
-    const newExp: Experience = { id: crypto.randomUUID(), company: "", role: "", period: "", description: "" };
+    const newExp: Experience = { id: crypto.randomUUID(), company: "", role: "", startDate: "", endDate: "", description: "", current: false };
     setResumeData((prev) => ({ ...prev, experiences: [...prev.experiences, newExp] }));
   };
 
@@ -18,25 +18,34 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
   };
 
   const handleChange = (id: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
+    
+    // Verifica se o input é um checkbox para tratar o valor 'checked'
+    const isCheckbox = type === 'checkbox';
+    const inputValue = isCheckbox ? (e.target as HTMLInputElement).checked : value;
+
     setResumeData((prev) => ({
       ...prev,
-      experiences: prev.experiences.map((exp) => (exp.id === id ? { ...exp, [name]: value } : exp)),
+      experiences: prev.experiences.map((exp) => {
+        if (exp.id === id) {
+          const updatedExp = { ...exp, [name]: inputValue };
+
+          // Se o checkbox 'current' foi marcado, limpa a data final
+          if (name === 'current' && inputValue === true) {
+            updatedExp.endDate = '';
+          }
+          return updatedExp;
+        }
+        return exp;
+      }),
     }));
   };
 
   const handleImprove = async (id: string, text: string) => {
-    const improved = await improveText(text);
-    setResumeData((prev) => ({
-      ...prev,
-      experiences: prev.experiences.map((e) => (e.id === id ? { ...e, description: improved } : e)),
-    }));
   };
 
-  const inputClasses =
-    "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary";
-  const buttonClasses =
-    "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-70 transition-opacity duration-200 whitespace-nowrap";
+  const inputClasses = "bg-gray-800 border border-gray-600 rounded-md p-2 w-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50";
+  const buttonClasses = "bg-gradient-custom text-white font-bold py-2 px-4 rounded-md hover:opacity-70 transition-opacity duration-200 whitespace-nowrap";
 
   return (
     <div className="p-4 border border-gray-700 rounded-lg">
@@ -58,38 +67,40 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
               ⨉
             </button>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                name="role"
-                value={exp.role}
-                onChange={(e) => handleChange(exp.id, e)}
-                placeholder="Cargo"
-                className={`${inputClasses} mt-6`}
-              />
-              <input
-                name="company"
-                value={exp.company}
-                onChange={(e) => handleChange(exp.id, e)}
-                placeholder="Empresa"
-                className={`${inputClasses} mt-6`}
-              />
+              <input name="role" value={exp.role} onChange={(e) => handleChange(exp.id, e)} placeholder="Cargo" className={`${inputClasses} mt-6`} />
+              <input name="company" value={exp.company} onChange={(e) => handleChange(exp.id, e)} placeholder="Empresa" className={`${inputClasses} mt-6`} />
             </div>
-            <input
-              name="period"
-              value={exp.period}
-              onChange={(e) => handleChange(exp.id, e)}
-              placeholder="Período (Ex: Jan 2020 - Dez 2022)"
-              className={`${inputClasses} mt-4`}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label className="text-xs text-gray-400">Data de Início</label>
+                <input type="date" name="startDate" value={exp.startDate} onChange={(e) => handleChange(exp.id, e)} className={inputClasses} />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400">Data de Fim</label>
+                <input
+                  type="date"
+                  name="endDate"
+                  value={exp.endDate}
+                  onChange={(e) => handleChange(exp.id, e)}
+                  disabled={exp.current} //LÓGICA PARA DESABILITAR
+                  className={inputClasses}
+                />
+              </div>
+            </div>
+            <div className="flex items-center mt-4">
+              <input
+                type="checkbox"
+                name="current"
+                id={`current-${exp.id}`}
+                checked={exp.current}
+                onChange={(e) => handleChange(exp.id, e)}
+                className="mr-2 h-4 w-4 rounded"
+              />
+              <label htmlFor={`current-${exp.id}`} className="text-gray-400">Trabalho atualmente aqui</label>
+            </div>
 
             <div className="flex items-start gap-4 mt-4">
-              <textarea
-                name="description"
-                value={exp.description}
-                onChange={(e) => handleChange(exp.id, e)}
-                placeholder="Descrição das atividades"
-                className={`${inputClasses} h-20`}
-              />
-
+              <textarea name="description" value={exp.description} onChange={(e) => handleChange(exp.id, e)} placeholder="Descrição das atividades" className={`${inputClasses} h-20`} />
               <button
                 type="button"
                 onClick={async (e) => {
@@ -122,6 +133,5 @@ const ExperienceForm: React.FC<Props> = ({ experiences, setResumeData }) => {
     </div>
   );
 };
-
 
 export default ExperienceForm;
